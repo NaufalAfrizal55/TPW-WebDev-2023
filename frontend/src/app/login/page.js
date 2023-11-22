@@ -8,6 +8,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+  const handleRedirect = () => {
+    // Replace 'https://example.com' with your desired external URL
+    window.location.href = "http://localhost:5000/api/auth/google";
+  };
+
   const handleLogin = async () => {
     try {
       const response = await fetch("/api/auth/signup", {
@@ -67,9 +72,19 @@ const Login = () => {
         >
           Login
         </button>
+        <br />
+        <button
+          type="button"
+          onClick={handleRedirect}
+          className=" border-spacing-3"
+        >
+          Google
+        </button>
       </form>
     </div>
   );
 };
 
 export default Login;
+
+// pages/index.js or any other page file
