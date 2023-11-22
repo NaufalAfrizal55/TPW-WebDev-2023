@@ -7,7 +7,7 @@ router.post('/signup', signup)
 
 router.post('/login', login)
 
-router.post('/logout', logout)
+router.get('/logout', logout)
 
 //GOOGLE AUTH
 router.get('/google', authGoogle)
