@@ -11,9 +11,9 @@ router.use(verifyJWT)
 
 router.get('/', getAllProducts)
 
-router.get('/:id', getTheProduct)
+router.get('/:id', verifyJWT, getTheProduct)
 
-router.post('/', createProduct)
+router.post('/', verifyJWT, createProduct)
 
 router.patch('/:id', updateProduct)
 

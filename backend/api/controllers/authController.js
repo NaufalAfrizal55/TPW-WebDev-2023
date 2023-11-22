@@ -2,6 +2,7 @@ const User = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
+
 //SIGN UP (/auth/signup)
 exports.signup = async(req, res) => {
     const {username, email, password, isAdmin} = req.body
@@ -60,7 +61,7 @@ exports.login = async(req, res) => {
             }
         },
         process.env.ACCESS_TOKEN_SECRET, 
-        {expiresIn: '10m'}
+        {expiresIn: '7h'}
     )
 
     const refreshToken = jwt.sign(
@@ -73,7 +74,7 @@ exports.login = async(req, res) => {
     res.cookie('jwt', refreshToken, {
         httpOnly: true, //accessible dri web server doang
         secure: true,   //harus https
-        sameSite: 'none',   //bisa cross-site cookie!
+        sameSite: 'None',   //bisa cross-site cookie!
         maxAge: 7 * 24 * 60 * 60 * 1000 //batas cookie 7 hari
     })
 

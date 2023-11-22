@@ -39,14 +39,23 @@ exports.authCallback = async(req, res) => {
             data: data,
         })
     }
-    let user = User.find({email: data.email})
-
-    if(!user){
-        user = await User.create({
-            email: data.email, 
+    try {
+        const user = await User.findOne({ email: data.email });
+      
+        if (!user || user.length === 0) {
+          const createUser = await User.create({
+            email: data.email,
             username: data.name,
-            })
-    }
+          });
+          res.json({ message: 'anjay' });
+        } else {
+          // Handle case when user already exists
+          res.json({ message: 'User already exists' });
+        }
+      } catch (error) {
+        console.log('Error:', error);
+      }
+      
 
     const accessToken = jwt.sign(
         {
@@ -56,7 +65,7 @@ exports.authCallback = async(req, res) => {
             }
         },
         process.env.ACCESS_TOKEN_SECRET, 
-        {expiresIn: '10m'}
+        {expiresIn: '10h'}
     )
     
     const refreshToken = jwt.sign(
@@ -68,10 +77,10 @@ exports.authCallback = async(req, res) => {
     res.cookie('jwt', refreshToken, {
         httpOnly: true, //accessible dri web server doang
         secure: true,   //harus https
-        sameSite: 'none',   //bisa cross-site cookie!
+        sameSite: 'None',   //bisa cross-site cookie!
         maxAge: 7 * 24 * 60 * 60 * 1000 //batas cookie 7 hari
     })
-    
     //REDIRECT KE FRONTEND
-    res.redirect('http://localhost:3000') 
+    res.redirect('http://localhost:3000')
+    res.redirect('http://localhost:5000/api/products') 
 }
