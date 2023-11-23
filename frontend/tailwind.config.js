@@ -1,4 +1,6 @@
+const plugin = require("tailwindcss/plugin");
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -7,8 +9,33 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        marquee: "marquee 25s linear infinite",
+        marquee2: "marquee2 25s linear infinite",
+      },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+        marquee2: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+      },
+
+      textShadow: {
+        sm: "0 1px 2px var(--tw-shadow-color)",
+        DEFAULT: "-3px 4px 1.8px rgba(0, 0, 0, 0.15 )",
+        lg: "0 8px 16px var(--tw-shadow-color)",
+      },
+      screens: {
+        m400: "1600px",
+        "3xl": "1680px",
+      },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        PoetsenOne: ["poetsen one", "Inter", "sans-serif"],
       },
 
       backgroundImage: {
@@ -25,11 +52,25 @@ module.exports = {
           900: "#1D1D21",
           800: "#593D29",
         },
+        brown: {
+          900: "#342418",
+        },
         button: {
           100: "#593C28",
         },
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          "text-shadow": (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme("textShadow") }
+      );
+    }),
+  ],
 };
