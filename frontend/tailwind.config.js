@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        unter: ["Inter", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
       },
 
       backgroundImage: {
@@ -22,6 +22,8 @@ module.exports = {
         text: {
           lightBrown: "#A85430",
           darkBrown: "#682210",
+          900: "#1D1D21",
+          800: "#593D29",
         },
         button: {
           100: "#593C28",

@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 // pages/login.js
-
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -24,10 +25,10 @@ const Login = () => {
       });
 
       if (response.ok) {
-        res.redirect("http://localhost:3000");
+        return res.redirect("http://localhost:3000");
         // Login successful, handle the response accordingly
       } else {
-        res.status(404).json({ message: "gagal ngab" });
+        return res.status(404).json({ message: "gagal ngab" });
         // Login failed, handle the error
       }
     } catch (error) {
@@ -68,7 +69,7 @@ const Login = () => {
         <button
           type="button"
           onClick={handleLogin}
-          className=" border-spacing-3"
+          className=" border-spacing-3 text-2xl font-semibold mb-4"
         >
           Login
         </button>
@@ -80,6 +81,7 @@ const Login = () => {
         >
           Google
         </button>
+        <br />
       </form>
     </div>
   );
