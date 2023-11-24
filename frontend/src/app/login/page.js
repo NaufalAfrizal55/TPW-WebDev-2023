@@ -50,19 +50,30 @@ const Login = () => {
               <div className="border-2 w-10 border-black inline-block mb-2"></div>
               {/* Social Login Section */}
               <div className="flex justify-center my-2">
-                <Link
+                <button
+                  type="button"
                   onClick={handleRedirect}
-                  href="#"
                   className="border-2 border-gray-200 rounded-full p-3 mx-1"
                 >
                   <div className="flex">
                     <FcGoogle className="text-2xl mr-2" />
                     <span className="">Google</span>
                   </div>
-                </Link>
+                </button>
               </div>
               <p className="text-gray-400 my-3">or use your email account</p>
               <div className="flex flex-col items-center">
+                <div className="bg-gray-100 w-64 p-2 flex items-center gap-2 mb-3">
+                  <IoIosMail className="text-gray-400" />
+                  <input
+                    type="username"
+                    name="username"
+                    placeholder="Username"
+                    className="bg-gray-100 outline-none text-sm flex-1"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
                 <div className="bg-gray-100 w-64 p-2 flex items-center gap-2 mb-3">
                   <IoIosMail className="text-gray-400" />
                   <input
@@ -70,6 +81,8 @@ const Login = () => {
                     name="email"
                     placeholder="Email"
                     className="bg-gray-100 outline-none text-sm flex-1"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="bg-gray-100 w-64 p-2 flex items-center gap-2">
@@ -79,8 +92,26 @@ const Login = () => {
                     name="password"
                     placeholder="Passwords"
                     className="bg-gray-100 outline-none text-sm flex-1"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
+              </div>
+              <div className="flex justify-center gap-4 my-3">
+                <button
+                  onClick={handleLogin}
+                  type="button"
+                  className="border-2 border-gray-300 text-black rounded-full px-8 py-2 inline-block font-semibold hover:bg-white hover:text-nav"
+                >
+                  Sign In
+                </button>
+                <button
+                  type="button"
+                  onClick={handleLogin}
+                  className="border-2 border-gray-300 text-black rounded-full px-8 py-2 inline-block font-semibold hover:bg-white hover:text-nav"
+                >
+                  Log Out
+                </button>
               </div>
             </div>
           </div>

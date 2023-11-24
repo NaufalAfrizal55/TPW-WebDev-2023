@@ -5,6 +5,7 @@ import heroSquare from "../../public/hero_kotak.svg";
 import kopiIcon from "../../public/heroKopi.svg";
 import Link from "next/link";
 import keyImg from "../../public/icon/key.svg";
+import BeanMasters from "../../public/logo/beanmaster.svg";
 
 export default function Home() {
   return (
@@ -71,9 +72,15 @@ export default function Home() {
 
       {/* Our Products */}
       <section className="h-screen w-full" id="product">
-        <div className="rotate-[1.94deg]  w-full mt-[80px] 3xl:mt-[104px]">
-          <div className="relative flex overflow-x-hidden m">
-            <div className="py-12 animate-marquee whitespace-nowrap">
+        <div className="rotate-[1.94deg]  w-full mt-[80px] 3xl:mt-[104px] ">
+          <div className="relative flex overflow-x-hidden justify-center items-center text-white h-[80px] bg-text-800">
+            <div className=" animate-marquee whitespace-nowrap">
+              <span className="mx-4 text-4xl font-inter font-semibold text-[24px]">
+                More than a coffee roaster
+              </span>
+              <span className="mx-4 text-4xl font-inter font-semibold text-[24px]">
+                Discover the Art and Science of Coffee with Us
+              </span>
               <span className="mx-4 text-4xl font-inter font-semibold text-[24px]">
                 More than a coffee roaster
               </span>
@@ -82,7 +89,13 @@ export default function Home() {
               </span>
             </div>
 
-            <div className="absolute top-0 py-12 animate-marquee2 whitespace-nowrap">
+            <div className="absolute animate-marquee2 whitespace-nowrap">
+              <span className="mx-4 text-4xl font-inter font-semibold text-[24px]">
+                More than a coffee roaster
+              </span>
+              <span className="mx-4 text-4xl font-inter font-semibold text-[24px]">
+                Discover the Art and Science of Coffee with Us
+              </span>
               <span className="mx-4 text-4xl font-inter font-semibold text-[24px]">
                 More than a coffee roaster
               </span>
@@ -101,7 +114,7 @@ export default function Home() {
           <h2 className="font-inter font-bold text-[40px] 3xl:text-[60px] text-brown-900">
             Explore our top products
           </h2>
-          <p className="font-inter font-semibold text-[17px] 3xl:text-[24px]">
+          <p className="font-inter font-semibold text-[18px] 3xl:text-[24px]">
             Top in the world, came with three favourite beans, single origin,
             blended, and flavored
           </p>
