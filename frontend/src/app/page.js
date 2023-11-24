@@ -82,7 +82,7 @@ export default function Home() {
 
       {/* Our Products */}
       <section className="h-screen w-full" id="product">
-        <div className="rotate-[1.94deg] mt-[80px] 3xl:mt-[104px] mx-auto w-[99%] px-1">
+        <div className="skew-y-[4deg] mt-[80px] 3xl:mt-[104px] px-1">
           <div className="relative flex overflow-x-hidden justify-center items-center text-white h-[80px] bg-text-800">
             <div className=" animate-marquee whitespace-nowrap">
               <span className="mx-4 text-4xl font-inter font-semibold text-[24px]">
