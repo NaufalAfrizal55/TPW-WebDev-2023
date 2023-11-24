@@ -16,34 +16,44 @@ export default function Home() {
           <div>
             <div>
               <div className="relative">
-                <h1 className="text-transparent bg-clip-text bg-gradient-to-br from-text-lightBrown to-text-darkBrown font-black font-inter text-[120px] leading-[101.50px] tracking-wide absolute z-10">
+                <h1 className="font-black font-inter text-[70px] leading-[70px] 2xl:text-[100px] 2xl:leading-[101.5px] 3xl:text-[120px] 3xl:leading-[101.50px] text-transparent bg-clip-text bg-gradient-to-br from-text-lightBrown to-text-darkBrown  tracking-wide absolute z-10">
                   BEAN
                   <br />
                   MASTERS
                 </h1>
-                <h1 className="z-0 font-black font-inter text-[120px] leading-[101.50px] tracking-wide text-shadow ">
+                <h1 className="z-0 font-black font-inter text-[70px] leading-[70px] 2xl:text-[100px] 2xl:leading-[101.5px] 3xl:text-[120px] 3xl:leading-[101.50px] tracking-wide text-shadow ">
                   BEAN
                   <br />
                   MASTERS
                 </h1>
               </div>
 
-              <h2 className="text-[61px] font-black leading-[101.50px] tracking-wide -mt-[10px] text-shadow">
+              <h2 className="text-[40px] 2xl:text-[50px] 3xl:text-[61px] font-black leading-[101.50px] tracking-wide -mt-[10px] text-shadow">
                 COFFEE ROASTERY
               </h2>
-              <p className="w-[597px] h-[108px] text-zinc-900 text-2xl leading-[26.5px] font-medium font-inter ">
+              <p className="text-xl 2xl:text-2xl leading-[23px] 2xl:leading-[26.5px] w-[497px] 2xl:w-[597px] h-[108px] 2xl:h-[108px] text-zinc-900 font-medium font-inter">
                 Source and roast high-quality coffee beans from around the
                 world, using our expertise & experience to bring out the best
                 flavors and aromas
               </p>
             </div>
 
-            <div href className="flex gap-[17px] -mt-[10px] ">
+            <div
+              href
+              className="flex gap-4 items-center -mt-[30px] 2xl:-mt-[10px] "
+            >
               <Link href="#">
-                <Image src={ourProduct}></Image>
+                <Image
+                  src={ourProduct}
+                  className="w-[160px] 2xl:w-[244px]"
+                  alt="our product"
+                ></Image>
               </Link>
-              <Link href="./login" className="hover:motion-safe:animate-bounce">
-                <Image src={joinNow}></Image>
+              <Link href="./login" alt="join now">
+                <Image
+                  src={joinNow}
+                  className="w-[126px] 2xl:w-[200px] hover:motion-safe:animate-bounce"
+                ></Image>
               </Link>
             </div>
           </div>
@@ -54,7 +64,7 @@ export default function Home() {
           <div className="relative -z-10">
             <Image
               src={heroSquare}
-              className="w-[450px] m400:w-[500px] 3xl:w-[666px]"
+              className="w-[320px] 2xl:w-[480px] 3xl:w-[666px]"
               alt="heroSquare"
             ></Image>
             {/* width={450}*/}
@@ -62,7 +72,7 @@ export default function Home() {
           <div className="absolute inset-0 flex items-center justify-end rotate-[-3.15deg]">
             <Image
               src={kopiIcon}
-              className="w-[680px] m400:w-[800px] 3xl:w-[987.5px]"
+              className="w-[620px] 2xl:w-[720px] 3xl:w-[987.5px]"
               alt="kopiIcon"
             ></Image>
             {/* width={680}  */}
@@ -72,7 +82,7 @@ export default function Home() {
 
       {/* Our Products */}
       <section className="h-screen w-full" id="product">
-        <div className="rotate-[1.94deg]  w-full mt-[80px] 3xl:mt-[104px] ">
+        <div className="rotate-[1.94deg] w-full mt-[80px] 3xl:mt-[104px] ">
           <div className="relative flex overflow-x-hidden justify-center items-center text-white h-[80px] bg-text-800">
             <div className=" animate-marquee whitespace-nowrap">
               <span className="mx-4 text-4xl font-inter font-semibold text-[24px]">

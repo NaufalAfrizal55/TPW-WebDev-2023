@@ -6,10 +6,14 @@ import chat from "../../../public/chat.svg";
 
 const Nav = () => {
   return (
-    <nav className=" bg-nav fixed w-full z-20 top-0 start-0 ">
+    <nav className=" bg-nav fixed w-screen z-20 top-0 start-0 ">
       <div className="flex flex-wrap items-center justify-between gap-[8px] pr-[80px] pl-[66px]">
         <a href="./" className="flex items-center rtl:space-x-reverse">
-          <Image src={Logo} width={200} alt="BeanMasters Logo" />
+          <Image
+            src={Logo}
+            className="w-[160px] 2xl:w-[240px]"
+            alt="BeanMasters Logo"
+          />
           {/* <span className="text-text-800 text-self-center text-2xl font-semibold whitespace-nowrap text-brown-500">
             BeanMasters
           </span> */}

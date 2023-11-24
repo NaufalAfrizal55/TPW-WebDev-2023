@@ -18,20 +18,21 @@ const Login = () => {
     window.location.href = "http://localhost:5000/api/auth/google";
   };
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/auth/logout", {
         method: "POST",
-        credentials: 'include'  //HARUS ADA INI
-      })
+        credentials: "include", //HARUS ADA INI
+      });
       if (response.ok) {
         console.log("berhasil logout client");
       } else {
-        console.log('gagal logout client');
+        console.log("gagal logout client");
       }
     } catch (error) {
       console.error("Error during login:", error);
     }
+    window.location.href = "http://localhost:3000";
   };
 
   const handleLogin = async () => {
