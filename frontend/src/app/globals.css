@@ -19,3 +19,8 @@
 body {
   background-color: #f3f1ee;
 }
+
+@font-face {
+  font-family: "poetsen One";
+  src: url("../../public/fonts/PoetsenOne-Regular.ttf");
+}

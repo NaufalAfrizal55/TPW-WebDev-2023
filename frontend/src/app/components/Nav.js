@@ -1,23 +1,31 @@
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../../public/logo/logo.svg";
+import cart from "../../../public/cart.svg";
+import chat from "../../../public/chat.svg";
 
 const Nav = () => {
   return (
     <nav className=" bg-nav fixed w-full z-20 top-0 start-0 ">
       <div className="flex flex-wrap items-center justify-between gap-[8px] pr-[80px] pl-[66px]">
         <a href="./" className="flex items-center rtl:space-x-reverse">
-          <Image className="" src={Logo} width={200} alt="BeanMasters Logo" />
+          <Image src={Logo} width={200} alt="BeanMasters Logo" />
           {/* <span className="text-text-800 text-self-center text-2xl font-semibold whitespace-nowrap text-brown-500">
             BeanMasters
           </span> */}
         </a>
 
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex items-center gap-3 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <Link href="#">
+            <Image src={chat} width={36} alt="chat-icon"></Image>
+          </Link>
+          <Link href="#">
+            <Image href="#" src={cart} width={36} alt="cart-icon"></Image>
+          </Link>
           <Link
             href="/login"
             type="button"
-            className="text-white hover:bg-orange-800 font-semibold font-Inter rounded-[53px] text-sm px-4 py-2 text-center bg-button-100 "
+            className="text-white hover:bg-orange-800 font-semibold font-inter rounded-[53px] text-sm px-4 py-2 text-center bg-button-100 "
           >
             Sign In
           </Link>
@@ -52,10 +60,10 @@ const Nav = () => {
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-sticky"
         >
-          <ul className="flex flex-col p-3 md:p-3 mt-4 font-medium border rounded-lg  md:space-x-[88px] rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
+          <ul className="flex flex-col p-3 md:p-3 mt-4 font-PoetsenOne border rounded-lg  md:space-x-[88px] rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
             <li>
               <Link
-                href="#"
+                href="./#home"
                 className="block py-2 px-3 text-text-900 hover:text-white md:bg-transparent md:p-0"
                 aria-current="page"
               >
@@ -64,7 +72,7 @@ const Nav = () => {
             </li>
             <li>
               <Link
-                href="#"
+                href="./#product"
                 className="block py-2 px-3 text-text-900 hover:text-white md:bg-transparent md:p-0  "
               >
                 Our Product
