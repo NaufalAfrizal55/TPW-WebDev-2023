@@ -18,6 +18,27 @@ const Login = () => {
     window.location.href = "http://localhost:5000/api/auth/google";
   };
 
+  const handleLogut = async () => {
+    try {
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        return res.redirect("http://localhost:3000");
+        // Login successful, handle the response accordingly
+      } else {
+        return res.status(404).json({ message: "gagal ngab" });
+        // Login failed, handle the error
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  };
+
   const handleLogin = async () => {
     try {
       const response = await fetch("/api/auth/signup", {
@@ -107,7 +128,7 @@ const Login = () => {
                 </button>
                 <button
                   type="button"
-                  onClick={handleLogin}
+                  onClick={handleLogut}
                   className="border-2 border-gray-300 text-black rounded-full px-8 py-2 inline-block font-semibold hover:bg-white hover:text-nav"
                 >
                   Log Out
