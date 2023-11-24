@@ -6,17 +6,17 @@ const { getAllProducts,
         updateProduct, 
         deleteProduct, } = require('../controllers/productController')
         
+const verifyAdmin = require("../middleware/verifyAdmin")
 const verifyJWT = require("../middleware/verifyJWT")
-router.use(verifyJWT)
 
 router.get('/', getAllProducts)
 
-router.get('/:id', verifyJWT, getTheProduct)
+router.get('/:id', getTheProduct)
 
-router.post('/', verifyJWT, createProduct)
+router.post('/', verifyJWT, verifyAdmin, createProduct)
 
-router.patch('/:id', updateProduct)
+router.patch('/:id', verifyJWT, verifyAdmin, updateProduct)
 
-router.delete('/:id', deleteProduct)
+router.delete('/:id', verifyJWT, verifyAdmin, deleteProduct)
 
 module.exports = router

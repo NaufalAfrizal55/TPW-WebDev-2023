@@ -7,14 +7,15 @@ const {getAllOrders,
         deleteOrder} = require('../controllers/orderController')
 
 const verifyJWT = require("../middleware/verifyJWT")
+const verifyAdmin = require("../middleware/verifyAdmin")
 router.use(verifyJWT)
 
-router.get('/', getAllOrders)
+router.get('/', verifyJWT, verifyAdmin, getAllOrders)
 
-router.get('/:id', getSingleOrder)
+router.get('/:id',verifyJWT, getSingleOrder)
 
-router.post('/', createOrder)
+router.post('/', verifyJWT, createOrder)
 
-router.delete('/:id', deleteOrder)
+router.delete('/:id', verifyJWT, verifyAdmin, deleteOrder)
 
 module.exports = router

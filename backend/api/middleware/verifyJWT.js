@@ -1,26 +1,20 @@
 const jwt = require("jsonwebtoken")
+const User = require('../models/userModel')
 
-const verifyJWT = (req, res, next) => {
-    const authHeader = req.headers.authorization || req.headers.Authorization
-    if(!authHeader?.startsWith('Bearer ')){
-        return res.status(401).json({message: 'Unauthorized JWT'})
-    }
-    const token = authHeader.split(' ')[1]
-
-    jwt.verify(
-        token, 
-        process.env.ACCESS_TOKEN_SECRET,
-        (err, decoded) => {
-            if (err) {
-                return res.status(403).json({ message: 'Forbidden' })
-            }
-            req.email = decoded.UserInfo.email
-            req.isAdmin = decoded.UserInfo.isAdmin
-            next()
+const verifyJWT = async(req, res, next) => {
+    let token
+    token = req.cookies.jwt;
+    if (token) {
+        try {
+          const decoded = jwt.verify(token, process.env.JWT_SECRET);
+          req.user = await User.findById(decoded.userId).select("-password");
+          next();
+        } catch (error) {
+          res.status(401).json({error: error.message});
         }
-        )
-    
+      } else {
+        res.status(401).json({message: "Not authorized, no token."});
+      }
 }
-//verifyJWT diaplikasikan ke routes yg ingin di-protected
 
 module.exports = verifyJWT
