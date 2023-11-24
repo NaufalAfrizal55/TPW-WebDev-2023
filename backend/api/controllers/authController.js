@@ -1,7 +1,7 @@
 const User = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-
+const generateToken = require('../utils/createToken')
 
 //SIGN UP (/auth/signup)
 exports.signup = async(req, res) => {
@@ -11,27 +11,32 @@ exports.signup = async(req, res) => {
     if(!username || !email || !password){
         return res.status(400).json({error: "All fields required"})
     }
-    //CHECK DUPLICATE
-    const duplicate = await User.findOne({username}).lean().exec()
+    //CHECK DUPLICATE EMAIL
+    const duplicate = await User.findOne({email}).lean().exec()
 
     if(duplicate){
-        return res.status(409).json({message: "duplicate username"})
+        return res.status(409).json({message: "User already exists"})
     }
 
     //HASHING PASSWORD 
     const salt = await bcrypt.genSalt(10)
     const hashPW = await bcrypt.hash(password, salt)
 
-    const userObject = { username, email, "password": hashPW, isAdmin }
-
-    //CREATE & STORE USER
-    const user = await User.create(userObject)
-
-    if(user){
-        res.status(200).json({message: `New User ${username} has been created`})
-    } else {
-        res.status(404).json({error: "Invalid data received"})
+    const newUser = new User({ username, email, "password": hashPW, isAdmin })
+    try {
+        //CREATE & STORE USER
+        await newUser.save()
+        generateToken(res, newUser._id)
+        return res.status(201).json({
+            _id: newUser._id,
+            username: newUser.username,
+            email: newUser.email,
+            isAdmin: newUser.isAdmin,
+          })
+    } catch (error){
+        return res.status(400).json({error: error.message})
     }
+
 }
 
 //LOG IN METHOD (/auth/login)
@@ -52,40 +57,21 @@ exports.login = async(req, res) => {
         return res.status(401).json({message: 'Unauthorized (wrong password)'})
     }
 
-    // BIKIN ACCESS TOKEN (JWT) KARENA UDH BENER LOGIN NYA
-    const accessToken = jwt.sign(
-        {
-            "UserInfo": {
-                "email": foundUser.email,
-                "isAdmin": foundUser.isAdmin
-            }
-        },
-        process.env.ACCESS_TOKEN_SECRET, 
-        {expiresIn: '7h'}
-    )
+    generateToken(res, foundUser._id)
+    res.status(201).json({
+        _id: foundUser._id,
+        username: foundUser.username,
+        email: foundUser.email,
+        isAdmin: foundUser.isAdmin,
+      })
 
-    const refreshToken = jwt.sign(
-        {"email": foundUser.email},
-        process.env.REFRESH_TOKEN_SECRET,
-        {expiresIn: '7d'}
-    )
-
-    //CREATE SECURE COOKIE with refresh token (nama cookie-nya jwt)
-    res.cookie('jwt', refreshToken, {
-        httpOnly: true, //accessible dri web server doang
-        secure: true,   //harus https
-        sameSite: 'None',   //bisa cross-site cookie!
-        maxAge: 7 * 24 * 60 * 60 * 1000 //batas cookie 7 hari
-    })
-
-    //SEND accessToken berisi email dan roles
-    res.json({ accessToken })
 }
 
 //LOGOUT METHOD (POST /auth/logout)
 exports.logout = (req, res) => {
-    const cookies = req.cookies
-    if (!cookies?.jwt) return res.sendStatus(204) //No content
-    res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true })
-    res.json({ message: 'Cookie cleared' })
+    res.cookie("jwt", "", {
+        httyOnly: true,
+        expires: new Date(0),
+      })
+    res.status(200).json({ message: "Logged out successfully" })
 }

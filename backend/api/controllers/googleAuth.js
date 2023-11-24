@@ -1,6 +1,7 @@
 const {google} = require('googleapis')
 const User = require('../models/userModel')
 const jwt = require('jsonwebtoken')
+const generateToken = require('../utils/createToken')
 
 const oauth2Client = new google.auth.OAuth2(
     process.env.CLIENT_ID,
@@ -20,6 +21,10 @@ const authorizationUrl = oauth2Client.generateAuthUrl({
 })
 
 exports.authGoogle = (req, res) => {
+    const cookies = req.cookies
+    if(cookies?.jwt){
+        return res.redirect('http://localhost:3000')
+    } 
     res.redirect(authorizationUrl)
 }
 
@@ -43,44 +48,20 @@ exports.authCallback = async(req, res) => {
         const user = await User.findOne({ email: data.email });
       
         if (!user || user.length === 0) {
-          const createUser = await User.create({
+          const createUser = new User({
             email: data.email,
             username: data.name,
-          });
-          res.json({ message: 'anjay' });
-        } else {
-          // Handle case when user already exists
-          res.json({ message: 'User already exists' });
-        }
+          })
+          generateToken(res, createUser._id)
+        } 
+        
+        generateToken(res, user._id)
+
       } catch (error) {
-        console.log('Error:', error);
+        return res.status(400).json({error: error.message})
       }
       
-
-    const accessToken = jwt.sign(
-        {
-            "UserInfo": {
-            "email": user?.email,
-            "isAdmin": user?.isAdmin
-            }
-        },
-        process.env.ACCESS_TOKEN_SECRET, 
-        {expiresIn: '10h'}
-    )
-    
-    const refreshToken = jwt.sign(
-        {"email": user?.email},
-        process.env.REFRESH_TOKEN_SECRET,
-        {expiresIn: '7d'}
-    )
-    
-    res.cookie('jwt', refreshToken, {
-        httpOnly: true, //accessible dri web server doang
-        secure: true,   //harus https
-        sameSite: 'None',   //bisa cross-site cookie!
-        maxAge: 7 * 24 * 60 * 60 * 1000 //batas cookie 7 hari
-    })
     //REDIRECT KE FRONTEND
     res.redirect('http://localhost:3000')
-    res.redirect('http://localhost:5000/api/products') 
+    // res.redirect('http://localhost:5000/api/products') 
 }
