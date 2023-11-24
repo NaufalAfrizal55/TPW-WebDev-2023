@@ -18,21 +18,16 @@ const Login = () => {
     window.location.href = "http://localhost:5000/api/auth/google";
   };
 
-  const handleLogut = async () => {
+  const handleLogout = async() => {
     try {
-      const response = await fetch("/api/auth/logout", {
+      const response = await fetch("http://localhost:5000/api/auth/logout", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
+        credentials: 'include'  //HARUS ADA INI
+      })
       if (response.ok) {
-        return res.redirect("http://localhost:3000");
-        // Login successful, handle the response accordingly
+        console.log("berhasil logout client");
       } else {
-        return res.status(404).json({ message: "gagal ngab" });
-        // Login failed, handle the error
+        console.log('gagal logout client');
       }
     } catch (error) {
       console.error("Error during login:", error);
@@ -128,7 +123,7 @@ const Login = () => {
                 </button>
                 <button
                   type="button"
-                  onClick={handleLogut}
+                  onClick={handleLogout}
                   className="border-2 border-gray-300 text-black rounded-full px-8 py-2 inline-block font-semibold hover:bg-white hover:text-nav"
                 >
                   Log Out
