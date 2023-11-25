@@ -7,6 +7,8 @@ import Link from "next/link";
 import keyImg from "../../public/icon/key.svg";
 import BeanMasters from "../../public/logo/beanmaster.svg";
 import Card from "./components/productCard";
+import CarePlanet from "./components/carePlanet";
+import Intensitiviti from "./components/intensitiviti";
 
 export default function Home() {
   return (
@@ -82,10 +84,10 @@ export default function Home() {
       </section>
 
       {/* Our Products */}
-      <section className="h-screen w-full" id="product">
+      <section className=" w-full" id="product">
         <div className="skew-y-[4deg] mt-[80px] 3xl:mt-[104px] px-1">
           <div className="relative flex overflow-x-hidden justify-center items-center text-white h-[80px] bg-text-800">
-            <div className=" animate-marquee whitespace-nowrap">
+            <div className="animate-marquee whitespace-nowrap">
               <span className="mx-4 text-4xl font-inter font-semibold text-[24px]">
                 More than a coffee roaster
               </span>
@@ -134,6 +136,9 @@ export default function Home() {
           <Card></Card>
         </div>
       </section>
+
+      <CarePlanet />
+      <Intensitiviti />
     </main>
   );
 }

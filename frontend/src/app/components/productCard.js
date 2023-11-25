@@ -7,7 +7,6 @@ import "swiper/css/free-mode";
 
 import { FreeMode, Pagination } from "swiper/modules";
 
-import { RxArrowTopRight } from "react-icons/rx";
 import { ServiceData } from "../constants/page.js";
 import Product from "./Product.js";
 
@@ -60,7 +59,7 @@ const productCard = () => {
   useEffect(() => {
     //FETCH ALL PRODUCTS FROM DB
     const fetchData = async () => {
-      const res = await fetch('http://localhost:5000/api/products');
+      const res = await fetch("http://localhost:5000/api/products");
       const result = await res.json();
       setData(result);
     };
@@ -69,20 +68,23 @@ const productCard = () => {
   }, []);
 
   return (
-    <Swiper 
-      className="h-[40vh] w-full"
+    <Swiper
+      className=""
       modules={[FreeMode, Pagination]}
       slidesPerView={3}
-      onSlideChange={() => console.log('slide change')}
+      onSlideChange={() => console.log("slide change")}
       onSwiper={(swiper) => console.log(swiper)}
     >
       {/* RENDER FOR ALL PRODUCTS */}
       {data.map((item) => (
-        <SwiperSlide>
-          <Product name={item.name} price={item.price} rating={item.rating} id={item._id} />
-          <RxArrowTopRight className="absolute bottom-5 left-5 w-[35px] h-[35px] text-white group-hover:text-blue-500 group-hover:rotate-45 duration-100" />
+        <SwiperSlide className="gap-4">
+          <Product
+            name={item.name}
+            price={item.price}
+            rating={item.rating}
+            id={item._id}
+          />
         </SwiperSlide>
-
       ))}
     </Swiper>
   );

@@ -1,31 +1,39 @@
-import React from 'react'
-import Image from 'next/image'
-import city1 from '../assets/city1.png'
-import Link from 'next/link'
+import React from "react";
+import Image from "next/image";
+import city1 from "../assets/city1.png";
+import { RxArrowTopRight } from "react-icons/rx";
 
 //{name, description, price, countInStock, image, rating}
 
 //CSS UTK TIAP KOTAK DI SINI
-const Product = ({name, price, image, rating, id}) => {
+const Product = ({ name, price, image, rating, id }) => {
   return (
-    <div className='p-[10px] bg-lime-500'>
-      <Link href={`/products/${id}`} >
-        <div className='flex w-[300px] h-[300px] flex-col shadow-lg shadow-[#ef4444] border-2 hover:scale-110 
-        transition ease-in-out duration-100 rounded-xl'>
-            <Image className='w-full rounded-xl'
-            src={city1}
-            alt="product"
+    <div className="flex items-center p-[5%]  w-full justify-center">
+      <Link href={`/products/${id}`}>
+        <div
+          className="group flex w-[300px] h-[500px] flex-col  shadow-lg shadow-neutral-500 hover:scale-110 
+        transition ease-in-out duration-100 rounded-xl bg-secondary-700  "
+        >
+          <div className="flex justify-center items-center">
+            <Image
+              className=" w-[200px] aspect-square border-[7px] border-[#B6B3AF] rounded-xl mt-9"
+              src={city1}
+              alt="product"
             />
-            <div className='flex flex-col items-center'>
-              <h1 className=''>{name}</h1>
-              {/* <p>{description}</p> */}
-              <h1>{price}</h1>
-              <h1>{rating}</h1>
-            </div>
-        </div>
-        </Link>
-    </div>
-  )
-}
+          </div>
+          <div className="flex flex-col items-center">
+            <h1 className="font-bold text-[20px] ">{name}</h1>
+            {/* <p>{description}</p> */}
+            <h1 className="font-semibold text-[18px]">{price}</h1>
+          </div>
 
-export default Product
+          <h1 className="absolute bottom-9 3xl:bottom-10 right-[75px] 2xl:right-[25%] 3xl:right-[30%] group-hover:bottom-5 group-hover:right-[28px]">
+            {rating}
+          </h1>
+        </div>
+      </Link>
+    </div>
+  );
+};
+
+export default Product;

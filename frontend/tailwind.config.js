@@ -13,8 +13,9 @@ module.exports = withMT({
   theme: {
     extend: {
       animation: {
-        marquee: "marquee 25s linear infinite",
-        marquee2: "marquee2 25s linear infinite",
+        marquee: "marquee 30s linear infinite",
+        marquee2: "marquee2 30s linear infinite",
+        "spin-slow": "spin 60s linear infinite",
       },
       keyframes: {
         marquee: {
@@ -49,6 +50,9 @@ module.exports = withMT({
       colors: {
         nav: "#E4E1DC",
         page: "#F3F1EE",
+        button: {
+          100: "#593C28",
+        },
         text: {
           lightBrown: "#A85430",
           darkBrown: "#682210",
@@ -56,10 +60,30 @@ module.exports = withMT({
           800: "#593D29",
         },
         brown: {
+          100: "#885D3F",
+          300: "#734F35",
+          500: "#593D29",
+          700: "#463020",
           900: "#342418",
         },
-        button: {
-          100: "#593C28",
+        cream: {
+          900: "#C8816A",
+          700: "#D6A08F",
+          500: "#E3BFB4",
+          300: "#EAD0C7",
+          100: "#F1DFDA",
+        },
+        secondary: {
+          500: "#F3F1EE",
+          700: "#E4E1DC",
+          900: "#CBC2B4",
+        },
+        neutral: {
+          100: "#F5F5F",
+          200: "#B6B7BA",
+          500: "#747680",
+          700: "#393A41",
+          900: "#1D1D21",
         },
       },
     },
