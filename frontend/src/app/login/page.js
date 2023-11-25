@@ -37,7 +37,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("/api/auth/signup", {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,15 +46,14 @@ const Login = () => {
       });
 
       if (response.ok) {
-        return res.redirect("http://localhost:3000");
-        // Login successful, handle the response accordingly
+        console.log("berhasil logout client");
       } else {
-        return res.status(404).json({ message: "gagal ngab" });
-        // Login failed, handle the error
+        console.log("gagal logout client");
       }
     } catch (error) {
       console.error("Error during login:", error);
     }
+    window.location.href = "http://localhost:3000";
   };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
