@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import city1 from "../assets/city1.png";
+import Link from "next/link";
 import { RxArrowTopRight } from "react-icons/rx";
 
 //{name, description, price, countInStock, image, rating}

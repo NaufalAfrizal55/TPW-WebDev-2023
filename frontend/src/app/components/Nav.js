@@ -8,7 +8,7 @@ const Nav = () => {
   return (
     <nav className=" bg-nav fixed w-screen z-20 top-0 start-0 ">
       <div className="flex flex-wrap items-center justify-between gap-[8px] pr-[80px] pl-[66px]">
-        <a href="./" className="flex items-center rtl:space-x-reverse">
+        <a href="/" className="flex items-center rtl:space-x-reverse">
           <Image
             src={Logo}
             className="w-[160px] 2xl:w-[240px]"
