@@ -1,13 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
 import city1 from '../assets/city1.png'
+import Link from 'next/link'
 
 //{name, description, price, countInStock, image, rating}
 
 //CSS UTK TIAP KOTAK DI SINI
-const Product = ({name, price, image, rating}) => {
+const Product = ({name, price, image, rating, id}) => {
   return (
     <div className='p-[10px] bg-lime-500'>
+      <Link href={`/products/${id}`} >
         <div className='flex w-[300px] h-[300px] flex-col shadow-lg shadow-[#ef4444] border-2 hover:scale-110 
         transition ease-in-out duration-100 rounded-xl'>
             <Image className='w-full rounded-xl'
@@ -21,6 +23,7 @@ const Product = ({name, price, image, rating}) => {
               <h1>{rating}</h1>
             </div>
         </div>
+        </Link>
     </div>
   )
 }
