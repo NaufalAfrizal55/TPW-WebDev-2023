@@ -83,6 +83,7 @@ const productCard = () => {
             price={item.price}
             rating={item.rating}
             id={item._id}
+            image={item.image}
           />
         </SwiperSlide>
       ))}

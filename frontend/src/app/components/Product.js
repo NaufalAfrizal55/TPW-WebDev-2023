@@ -18,7 +18,9 @@ const Product = ({ name, price, image, rating, id }) => {
           <div className="flex justify-center items-center">
             <Image
               className=" w-[200px] aspect-square border-[7px] border-[#B6B3AF] rounded-xl mt-9"
-              src={city1}
+              src={image}
+              width={200}
+              height={300}
               alt="product"
             />
           </div>
