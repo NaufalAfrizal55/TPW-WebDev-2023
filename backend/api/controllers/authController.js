@@ -12,7 +12,7 @@ exports.signup = async(req, res) => {
         return res.status(400).json({error: "All fields required"})
     }
     //CHECK DUPLICATE EMAIL
-    const duplicate = await User.findOne({email}).lean().exec()
+    const duplicate = await User.findOne({email})
 
     if(duplicate){
         return res.status(409).json({message: "User already exists"})
@@ -22,12 +22,12 @@ exports.signup = async(req, res) => {
     const salt = await bcrypt.genSalt(10)
     const hashPW = await bcrypt.hash(password, salt)
 
-    const newUser = new User({ username, email, "password": hashPW, isAdmin })
     try {
         //CREATE & STORE USER
-        await newUser.save()
+        const newUser = User.create({ username, email, password: hashPW, isAdmin })
         generateToken(res, newUser._id)
-        return res.status(201).json({
+        console.log(newUser);
+        res.status(201).json({
             _id: newUser._id,
             username: newUser.username,
             email: newUser.email,
@@ -46,26 +46,25 @@ exports.login = async(req, res) => {
         return res.status(400).json({message: 'All fields are required'})
     }
     //CEK apakah ada akun yg mau login
-    const foundUser = await User.findOne({email}).exec()
+    const foundUser = await User.findOne({email})
     if(!foundUser){
         return res.status(401).json({message: 'Unauthorized (no email found)'})
     }
 
     //CEK PW benar belum
-    const match = await bcrypt.compare(password, foundUser.password)
+    const match = bcrypt.compareSync(password, foundUser.password)
     if(!match){
         return res.status(401).json({message: 'Unauthorized (wrong password)'})
+    } 
+        generateToken(res, foundUser._id)
+        console.log(foundUser);
+        res.status(201).json({
+            _id: foundUser._id,
+            username: foundUser.username,
+            email: foundUser.email,
+            isAdmin: foundUser.isAdmin,
+            })
     }
-
-    generateToken(res, foundUser._id)
-    res.status(201).json({
-        _id: foundUser._id,
-        username: foundUser.username,
-        email: foundUser.email,
-        isAdmin: foundUser.isAdmin,
-      })
-
-}
 
 //LOGOUT METHOD (POST /auth/logout)
 exports.logout = (req, res) => {
