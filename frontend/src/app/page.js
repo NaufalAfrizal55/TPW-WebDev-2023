@@ -6,6 +6,7 @@ import kopiIcon from "../../public/heroKopi.svg";
 import Link from "next/link";
 import keyImg from "../../public/icon/key.svg";
 import BeanMasters from "../../public/logo/beanmaster.svg";
+import Card from "./components/productCard";
 
 export default function Home() {
   return (
@@ -128,6 +129,9 @@ export default function Home() {
             Top in the world, came with three favourite beans, single origin,
             blended, and flavored
           </p>
+        </div>
+        <div>
+          <Card></Card>
         </div>
       </section>
     </main>
