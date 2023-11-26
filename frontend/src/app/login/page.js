@@ -25,7 +25,7 @@ const Login = () => {
       });
       if (response.ok) {
         console.log("berhasil logout client");
-        localStorage.removeItem('user')
+        localStorage.removeItem("user");
       } else {
         console.log("gagal logout client");
       }
@@ -45,10 +45,10 @@ const Login = () => {
         credentials: "include",
         body: JSON.stringify({ username, password, email }),
       });
-      const json = await response.json()
+      const json = await response.json();
       if (response.ok) {
         console.log("berhasil login client");
-        localStorage.setItem('user', JSON.stringify(json))
+        localStorage.setItem("user", JSON.stringify(json));
       } else {
         console.log("gagal login client");
       }
@@ -68,10 +68,10 @@ const Login = () => {
         credentials: "include",
         body: JSON.stringify({ username, password, email }),
       });
-      const json = await response.json()
+      const json = await response.json();
       if (response.ok) {
         console.log("berhasil signup client");
-        localStorage.setItem('user', JSON.stringify(json))
+        localStorage.setItem("user", JSON.stringify(json));
       } else {
         console.log("gagal signup client");
       }
@@ -82,7 +82,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex flex-col items-center justify-center h-[110vh] py-2">
       <div className="flex flex-col items-center justify-center w-full flex-1 lg:px-20 text-center">
         <div className="bg-white rounded-2xl shadow-2xl flex flex-col-reverse md:flex-row w-2/3 max-w-4xl">
           {/* Sign in section */}
