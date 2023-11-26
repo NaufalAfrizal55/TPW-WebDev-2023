@@ -1,21 +1,9 @@
 const Order = require('../models/orderModel')
 
-// exports.getAllOrder = async(req, res) => {
-
 exports.getAllOrders = async(req, res) => {
   const orders = await Order.find().sort({DateOrdered: -1})
   res.status(200).json(orders)
 }
-// }
-
-// exports.getUserOrders = async (req, res) => {
-//     try {
-//       const orders = await Order.find({ user: req.user._id });
-//       res.json(orders);
-//     } catch (error) {
-//       res.status(500).json({ error: error.message });
-//     }
-//   };
 
 exports.getOrdersClient = async(req, res) =>{
     const clientOrder = await Order.find({user: req.params.id}).populate('user').populate('orderItems.product').sort({'dateOrdered': -1})

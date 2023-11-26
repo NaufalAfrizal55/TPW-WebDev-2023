@@ -4,7 +4,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const connectDB = require('./api/config/connectDB')
-const corsOptions = require('./api/config/cosrOptions')
+const corsOptions = require('./api/config/corsOptions')
 require('dotenv').config()
 
 //IMPORT ROUTES
