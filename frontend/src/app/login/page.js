@@ -41,6 +41,7 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify({ username, password, email }),
       });
 
@@ -53,7 +54,7 @@ const Login = () => {
       console.error("Error during login:", error);
     }
     console.log(username, email, password);
-    // window.location.href = "http://localhost:3000";
+    window.location.href = "http://localhost:3000"
   };
   const handleSignup = async () => {
     try {
@@ -62,6 +63,7 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify({ username, password, email }),
       });
 

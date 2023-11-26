@@ -45,14 +45,14 @@ export default function Home() {
               href
               className="flex gap-4 items-center -mt-[30px] 2xl:-mt-[10px] "
             >
-              <Link href="#">
+              <Link href="/#product">
                 <Image
                   src={ourProduct}
-                  className="w-[160px] 2xl:w-[244px]"
+                  className="w-[160px] 2xl:w-[244px] hover:motion-safe:animate-bounce"
                   alt="our product"
                 ></Image>
               </Link>
-              <Link href="./login" alt="join now">
+              <Link href="/login" alt="join now">
                 <Image
                   src={joinNow}
                   className="w-[126px] 2xl:w-[200px] hover:motion-safe:animate-bounce"

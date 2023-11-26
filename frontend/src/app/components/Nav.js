@@ -20,8 +20,8 @@ const Nav = () => {
         </a>
 
         <div className="flex items-center gap-3 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <Link href="#">
-            <Image src={chat} width={36} alt="chat-icon"></Image>
+          <Link href="https://wa.me/+6288232863355">
+            <Image src={chat} width={36} alt="chat-icon" className="hover:bg-brown-100 rounded-full"></Image>
           </Link>
           <Link href="#">
             <Image href="#" src={cart} width={36} alt="cart-icon"></Image>
