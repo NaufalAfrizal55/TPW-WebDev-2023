@@ -27,7 +27,7 @@ const Footer = () => {
             </div> */}
           {/* </ul> */}
         </div>
-        <div className="p-5 text-neutral-900">
+        <div className="p-5 text-center md:text-left md:basis-[30%] text-neutral-900">
           <ul>
             {/* <p className="text-gray-800 font-bold text-2xl pb-4">Product</p> */}
             <li className=" text-md pb-2 font-semibold hover:text-brown-300 cursor-pointer">
@@ -45,7 +45,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="p-5 text-neutral-900">
-          <ul className="">
+          <ul className="text-center flex flex-col items-center md:flex-none md:items-start md:text-left">
             {/* <p className="text-gray-800 font-bold text-2xl pb-4">Company</p> */}
             <li className=" text-md pb-2 font-semibold cursor-pointer my-4 text-[18px] 3xl:text-[24px]">
               Get in touch

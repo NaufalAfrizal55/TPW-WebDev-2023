@@ -9,26 +9,32 @@ import { RxArrowRight } from "react-icons/rx";
 
 const Intensitiviti = ({ id }) => {
   return (
-    <section className="h-screen" id={id}>
-      <div className="flex gap-7 mt-20 mx-[60px]">
-        <div className="w-[40%]">
+    <section className="h-auto mt-auto lg:mt-0" id={id}>
+      <div className="flex flex-col justify-center items-center lg:justify-normal lg:flex-row gap-7 mt-20 mx-[60px]">
+        <div className="flex justify-center lg:flex-none lg:justify-normal lg:basis-[40%]">
           <Image
             src={Planet}
             className="w-[500px] 2xl:w-[600px] 3xl:w-[753px] justify-end animate-spin-slow"
           />
         </div>
-        <div className="w-[59%] grid grid-rows-4">
+        <div className="lg:w-[59%] grid grid-rows-4">
           {/* 1 */}
-          <div>
-            <h2 className=" text-brown-900 font-inter font-medium text-[48px] 2xl:text-[50px] 3xl:text-[60px] ">
-              How we care for the <strong>Planet</strong>
+          <div className="">
+            <h2 className=" text-brown-900 font-inter font-medium text-[48px] 2xl:text-[50px] 3xl:text-[60px] md:text-justify">
+              How we care for the <strong>Planet</strong> and the{" "}
+              <strong>People</strong>
             </h2>
-            <h2 className=" text-brown-900 font-inter font-medium text-[40px] 2xl:text-[50px] 3xl:text-[60px] ">
-              and the <strong>People</strong>
-            </h2>
+            {/* <div className=" invisible lg:visible">
+              <h2 className=" text-brown-900 font-inter font-medium text-[48px] 2xl:text-[50px] 3xl:text-[60px] ">
+                How we care for the <strong>Planet</strong>
+              </h2>
+              <h2 className=" text-brown-900 font-inter font-medium text-[40px] 2xl:text-[50px] 3xl:text-[60px] ">
+                and the <strong>People</strong>
+              </h2>
+            </div> */}
           </div>
           {/* 2 */}
-          <div className="grid grid-cols-2 items-center gap-4">
+          <div className="grid grid-cols-none grid-rows-2 md:grid-cols-2 md:grid-rows-none items-center gap-4">
             {/* No Straw */}
             <div className="flex items-center gap-3">
               <Image
@@ -67,7 +73,7 @@ const Intensitiviti = ({ id }) => {
             </div>
           </div>
           {/* 3 */}
-          <div className="grid grid-cols-2 items-center gap-4 mt-3">
+          <div className="grid grid-cols-none grid-rows-2 md:grid-cols-2 md:grid-rows-none items-center gap-4 mt-3">
             {/* eco friendly */}
             <div className="flex items-center gap-3">
               <Image
@@ -109,7 +115,7 @@ const Intensitiviti = ({ id }) => {
           <div className=" mt-4">
             <button
               type="button"
-              className="bg-brown-500 text-white rounded-full px-8 py-2 flex items-center justify-center gap-1 font-semibold hover:bg-brown-100 hover:scale-105 transition ease-in-out duration-100"
+              className="bg-brown-500 text-white rounded-full px-8 py-2  flex items-center justify-center gap-1 font-semibold hover:bg-brown-100 hover:scale-105 transition ease-in-out duration-100"
             >
               About Us <RxArrowRight />
             </button>
