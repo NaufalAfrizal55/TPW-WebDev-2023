@@ -9,6 +9,8 @@ import BeanMasters from "../../public/logo/beanmaster.svg";
 import Card from "./components/productCard";
 import CarePlanet from "./components/carePlanet";
 import Intensitiviti from "./components/intensitiviti";
+import Contact from "./components/contact";
+import Footer from "./components/footer";
 
 export default function Home() {
   return (
@@ -84,7 +86,7 @@ export default function Home() {
       </section>
 
       {/* Our Products */}
-      <section className=" w-full" id="product">
+      <section className=" w-full" id="market">
         <div className="skew-y-[4deg] mt-[80px] 3xl:mt-[104px] px-1">
           <div className="relative flex overflow-x-hidden justify-center items-center text-white h-[80px] bg-text-800">
             <div className="animate-marquee whitespace-nowrap">
@@ -122,7 +124,7 @@ export default function Home() {
           <Image
             src={keyImg}
             alt="keyImage"
-            className="w-[50px] 3xl:w-[71px]"
+            className="w-[50px] 3xl:w-[71px] animate-bounce"
           ></Image>
           <h2 className="font-inter font-bold text-[40px] 3xl:text-[60px] text-brown-900">
             Explore our top products
@@ -137,8 +139,10 @@ export default function Home() {
         </div>
       </section>
 
-      <CarePlanet />
-      <Intensitiviti />
+      <CarePlanet id="process" />
+      <Intensitiviti id="aboutus" />
+      <Contact />
+      <Footer />
     </main>
   );
 }
