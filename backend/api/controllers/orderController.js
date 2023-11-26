@@ -1,38 +1,12 @@
 const Order = require('../models/orderModel')
-const OrderItem = require("../models/orderItem")
 
-function calcPrices(orderItems) {
-    const itemsPrice = orderItems.reduce(
-      (acc, item) => acc + item.price * item.qty,
-      0
-    );
-  
-    const shippingPrice = itemsPrice > 100 ? 0 : 10;
-    const taxRate = 0.15;
-    const taxPrice = (itemsPrice * taxRate).toFixed(2);
-  
-    const totalPrice = (
-      itemsPrice +
-      shippingPrice +
-      parseFloat(taxPrice)
-    ).toFixed(2);
-  
-    return {
-      itemsPrice: itemsPrice.toFixed(2),
-      shippingPrice: shippingPrice.toFixed(2),
-      taxPrice,
-      totalPrice,
-    };
-  }
+// exports.getAllOrder = async(req, res) => {
 
 exports.getAllOrders = async(req, res) => {
-    try {
-        const orders = await Order.find({}).populate("user", "id username");
-        res.json(orders);
-      } catch (error) {
-        res.status(500).json({ error: error.message });
-      }
+  const orders = await Order.find().sort({DateOrdered: -1})
+  res.status(200).json(orders)
 }
+// }
 
 // exports.getUserOrders = async (req, res) => {
 //     try {
@@ -43,67 +17,31 @@ exports.getAllOrders = async(req, res) => {
 //     }
 //   };
 
-exports.getSingleOrder = async(req, res) =>{
-    const order = await Order.findById(req.params.id)
-    .populate('user', 'name')
-    if(!order) {
+exports.getOrdersClient = async(req, res) =>{
+    const clientOrder = await Order.find({user: req.params.id}).populate('user').populate('orderItems.product').sort({'dateOrdered': -1})
+    if(!clientOrder) {
         return res.status(500).json({message: 'cannot get an order'})
     } 
-    res.status(200).json(order);
+    res.status(200).json(clientOrder);
 }
 
 exports.createOrder = async(req, res) => {
     try {
-        const { orderItems, shippingAddress, paymentMethod } = req.body;
+        const { user, orderItems } = req.body;
     
         if (orderItems && orderItems.length === 0) {
-          res.status(400);
-          throw new Error("No order items");
+          res.status(400).json({error: "No order items"});
         }
-    
-        const itemsFromDB = await Product.find({
-          _id: { $in: orderItems.map((x) => x._id) },
-        });
-    
-        const dbOrderItems = orderItems.map((itemFromClient) => {
-          const matchingItemFromDB = itemsFromDB.find(
-            (itemFromDB) => itemFromDB._id.toString() === itemFromClient._id
-          );
-    
-          if (!matchingItemFromDB) {
-            res.status(404);
-            throw new Error(`Product not found: ${itemFromClient._id}`);
-          }
-    
-          return {
-            ...itemFromClient,
-            product: itemFromClient._id,
-            price: matchingItemFromDB.price,
-            _id: undefined,
-          };
-        });
-    
-        const { itemsPrice, taxPrice, shippingPrice, totalPrice } =
-          calcPrices(dbOrderItems);
-    
-        const order = new Order({
-          orderItems: dbOrderItems,
-          user: req.user._id,
-          shippingAddress,
-          paymentMethod,
-          itemsPrice,
-          taxPrice,
-          shippingPrice,
-          totalPrice,
-        });
-    
+
+        let itemsPrice = orderItems.qty * orderItems.price
+
+        const order = new Order({user, orderItems, itemsPrice})
         const createdOrder = await order.save();
         res.status(201).json(createdOrder);
       } catch (error) {
         res.status(500).json({ error: error.message });
       }
 }   
-
 
 exports.deleteOrder = (req, res) => {
     Order.findByIdAndRemove(req.params.id).then(async order =>{

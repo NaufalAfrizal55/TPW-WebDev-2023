@@ -25,6 +25,7 @@ const Login = () => {
       });
       if (response.ok) {
         console.log("berhasil logout client");
+        localStorage.removeItem('user')
       } else {
         console.log("gagal logout client");
       }
@@ -44,9 +45,10 @@ const Login = () => {
         credentials: 'include',
         body: JSON.stringify({ username, password, email }),
       });
-
+      const json = await response.json()
       if (response.ok) {
         console.log("berhasil login client");
+        localStorage.setItem('user', JSON.stringify(json))
       } else {
         console.log("gagal login client");
       }
@@ -66,9 +68,10 @@ const Login = () => {
         credentials: 'include',
         body: JSON.stringify({ username, password, email }),
       });
-
+      const json = await response.json()
       if (response.ok) {
         console.log("berhasil signup client");
+        localStorage.setItem('user', JSON.stringify(json))
       } else {
         console.log("gagal signup client");
       }

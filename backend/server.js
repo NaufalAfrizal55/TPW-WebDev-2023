@@ -10,6 +10,7 @@ require('dotenv').config()
 //IMPORT ROUTES
 const productRoutes = require('./api/routes/productRoutes')
 const authRoutes = require('./api/routes/authRoutes')
+const orderRoutes = require('./api/routes/orderRoutes')
 
 const app = express()
 connectDB()
@@ -24,6 +25,9 @@ app.use('/api/auth', authRoutes)
 
 //PRODUCTS ROUTES
 app.use('/api/products', productRoutes)
+
+//ORDER ROUTES
+app.use('/api/order', orderRoutes)
 
 mongoose.connection.once('open', () => {
     app.listen(process.env.PORT, () => {

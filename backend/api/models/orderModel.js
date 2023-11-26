@@ -7,11 +7,12 @@ const orderSchema = new Schema ({
         ref: 'User',                        
         required: true       
     },
-    orderItems: [
-        {
-          name: { type: String, required: true },
-          qty: { type: Number, required: true },
-          image: { type: String, required: true },
+    orderItems: {
+          qty: { 
+            type: Number, 
+            required: true,
+            default: 1
+          },
           price: { type: Number, required: true },
           product: {
             type: mongoose.Schema.Types.ObjectId,
@@ -19,9 +20,10 @@ const orderSchema = new Schema ({
             ref: "Product",
           },
         },
-      ],
-    totalPrice: {
+    itemsPrice: {
         type: Number,
+        required: true,
+        default: 0.0,
     },
     dateOrdered: {
         type: Date,

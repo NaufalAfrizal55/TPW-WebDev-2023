@@ -54,7 +54,6 @@ exports.authCallback = async(req, res) => {
           generateToken(res, createUser._id)
         } else {
             generateToken(res, user._id)
-
         }
       } catch (error) {
         return res.status(400).json({error: error.message})
@@ -62,5 +61,4 @@ exports.authCallback = async(req, res) => {
       
     //REDIRECT KE FRONTEND
     res.redirect('http://localhost:3000')
-    // res.redirect('http://localhost:5000/api/products') 
 }
