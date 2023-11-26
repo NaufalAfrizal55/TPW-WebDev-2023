@@ -102,35 +102,35 @@ const Login = () => {
               </div>
               <p className="text-gray-700 my-3">or use your email account</p>
               <div className="flex flex-col items-center">
-                <div className="bg-gray-100 w-64 p-2 flex items-center gap-2 mb-3">
+                <div className="bg-nav w-64 p-2 flex items-center gap-2 mb-3">
                   <IoIosMail className="text-gray-400" />
                   <input
                     type="username"
                     name="username"
                     placeholder="Username"
-                    className="bg-gray-100 outline-none text-sm  flex-1"
+                    className="bg-nav outline-none text-sm  flex-1"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
-                <div className="bg-gray-100 w-64 p-2 flex items-center gap-2 mb-3">
+                <div className="bg-nav w-64 p-2 flex items-center gap-2 mb-3">
                   <IoIosMail className="text-gray-400" />
                   <input
                     type="email"
                     name="email"
                     placeholder="Email"
-                    className="bg-gray-100 outline-none text-sm flex-1"
+                    className="bg-nav outline-none text-sm flex-1"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                <div className="bg-gray-100 w-64 p-2 flex items-center gap-2">
+                <div className="bg-nav w-64 p-2 flex items-center gap-2">
                   <MdLockOutline className="text-gray-400" />
                   <input
                     type="password"
                     name="password"
                     placeholder="Passwords"
-                    className="bg-gray-100 outline-none text-sm flex-1"
+                    className="bg-nav outline-none text-sm flex-1"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -140,14 +140,14 @@ const Login = () => {
                 <button
                   onClick={handleLogin}
                   type="button"
-                  className="border-2 border-gray-300 text-black rounded-full px-8 py-2 inline-block font-semibold hover:bg-blue-gray-400 hover:text-nav"
+                  className="border-2 border-blue-gray-300 text-black rounded-full px-8 py-2 inline-block font-semibold hover:bg-blue-gray-400 hover:text-nav"
                 >
                   Sign In
                 </button>
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="border-2 border-gray-300 text-black rounded-full px-8 py-2 inline-block font-semibold hover:bg-blue-gray-400 hover:text-nav"
+                  className="border-2 border-blue-gray-300 text-black rounded-full px-8 py-2 inline-block font-semibold hover:bg-blue-gray-400 hover:text-nav"
                 >
                   Log Out
                 </button>
@@ -163,7 +163,7 @@ const Login = () => {
             </p>
             <button
               onClick={handleSignup}
-              className="border-2 border-white text-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-nav"
+              className="border-2 border-blue-gray-300 rounded-full px-12 py-2 inline-block font-semibold hover:bg-blue-gray-400 hover:text-nav"
             >
               Sign Up
             </button>
