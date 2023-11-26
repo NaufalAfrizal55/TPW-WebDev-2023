@@ -10,7 +10,6 @@ import Card from "./components/productCard";
 import CarePlanet from "./components/carePlanet";
 import Intensitiviti from "./components/intensitiviti";
 import Contact from "./components/contact";
-import Footer from "./components/footer";
 import { RxArrowRight } from "react-icons/rx";
 
 export default function Home() {
@@ -145,29 +144,10 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <CarePlanet id="process" />
       <Intensitiviti id="aboutus" />
       <Contact />
-      <Footer />
     </main>
   );
 }
-//leading-relaxed
-{
-  /* <h1
-className="text-transparent text-[120px] bg-clip-text bg-gradient-to-br from-text-lightBrown to-text-darkBrown font-black font-Inter leading-[101.50px] tracking-wide drop-shadow-md
 
-"
->
-BEAN
-<br />
-MASTERS
-</h1>
-<h2 className="text-[61px] font-black">COFFEE ROASTERY</h2>
-<div className="w-[597px] h-[108px] text-zinc-900 text-[24px] leading-[26.5px] font-medium font-Inter ">
-Source and roast high-quality coffee beans from around the world,
-using our expertise & experience to bring out the best flavors and
-aromas
-</div> */
-}

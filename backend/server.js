@@ -31,6 +31,6 @@ app.use('/api/order', orderRoutes)
 
 mongoose.connection.once('open', () => {
     app.listen(process.env.PORT, () => {
-        console.log(`listening on port http://localhost:${process.env.PORT} WENGDEV TPW`)
+        console.log(`listening on port http://localhost:${process.env.PORT} WEBDEV TPW`)
     })
 })

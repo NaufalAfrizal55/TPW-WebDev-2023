@@ -24,14 +24,6 @@ const Intensitiviti = ({ id }) => {
               How we care for the <strong>Planet</strong> and the{" "}
               <strong>People</strong>
             </h2>
-            {/* <div className=" invisible lg:visible">
-              <h2 className=" text-brown-900 font-inter font-medium text-[48px] 2xl:text-[50px] 3xl:text-[60px] ">
-                How we care for the <strong>Planet</strong>
-              </h2>
-              <h2 className=" text-brown-900 font-inter font-medium text-[40px] 2xl:text-[50px] 3xl:text-[60px] ">
-                and the <strong>People</strong>
-              </h2>
-            </div> */}
           </div>
           {/* 2 */}
           <div className="grid grid-cols-none grid-rows-2 md:grid-cols-2 md:grid-rows-none items-center gap-4">

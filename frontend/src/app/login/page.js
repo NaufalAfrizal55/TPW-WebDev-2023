@@ -1,8 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/router";
-import Cookies from "js-cookie";
-import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { IoIosMail } from "react-icons/io";
 import { MdLockOutline } from "react-icons/md";
@@ -25,7 +22,6 @@ const Login = () => {
       });
       if (response.ok) {
         console.log("berhasil logout client");
-        localStorage.removeItem("user");
       } else {
         console.log("gagal logout client");
       }
@@ -48,7 +44,6 @@ const Login = () => {
       const json = await response.json();
       if (response.ok) {
         console.log("berhasil login client");
-        localStorage.setItem("user", JSON.stringify(json));
       } else {
         console.log("gagal login client");
       }
@@ -71,7 +66,6 @@ const Login = () => {
       const json = await response.json();
       if (response.ok) {
         console.log("berhasil signup client");
-        localStorage.setItem("user", JSON.stringify(json));
       } else {
         console.log("gagal signup client");
       }
@@ -180,56 +174,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// pages/index.js or any other page file
-
-{
-  /* <div>
-<h1>Login</h1>
-<form>
-  <label>
-    Username:
-    <input
-      type="text"
-      value={username}
-      onChange={(e) => setUsername(e.target.value)}
-    />
-  </label>
-  <br />
-  <label>
-    Email:
-    <input
-      type="text"
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-    />
-  </label>
-  <br />
-  <label>
-    Password:
-    <input
-      type="password"
-      value={password}
-      onChange={(e) => setPassword(e.target.value)}
-    />
-  </label>
-  <br />
-  <button
-    type="button"
-    onClick={handleLogin}
-    className=" border-spacing-3 text-2xl font-semibold mb-4"
-  >
-    Login
-  </button>
-  <br />
-  <button
-    type="button"
-    onClick={handleRedirect}
-    className=" border-spacing-3"
-  >
-    Google
-  </button>
-  <br />
-</form>
-</div> */
-}

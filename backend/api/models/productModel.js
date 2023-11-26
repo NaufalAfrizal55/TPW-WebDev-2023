@@ -26,12 +26,7 @@ const productSchema = new Schema ({
     rating: {
         type: Number,
         default: 0,
-    },
-    // category: { 
-    //     type: ObjectId, 
-    //     ref: "Category", 
-    //     required: true 
-    // }
+    }
 }, {timestamps: true})
 
 module.exports = mongoose.model('Product', productSchema)

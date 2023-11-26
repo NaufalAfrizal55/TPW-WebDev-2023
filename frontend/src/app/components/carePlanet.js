@@ -38,7 +38,6 @@ export function carePlanet({ id }) {
           </div>
         </div>
       </div>
-      {/* </div> */}
     </section>
   );
 }

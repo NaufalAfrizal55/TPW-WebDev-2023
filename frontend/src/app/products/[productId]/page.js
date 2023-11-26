@@ -2,11 +2,14 @@
 
 import React from "react";
 import { useState, useEffect } from "react";
-import city1 from "../../assets/city1.png";
 import Image from "next/image";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
+import { NumberFormatBase } from "react-number-format";
 
 export default function productDetail({ params }) {
   const [theProduct, setTheProduct] = useState([]);
+  const [qty, setQty] = useState()
   useEffect(() => {
     //FETCH PRODUCT FROM DB
     const fetchData = async () => {
@@ -23,8 +26,10 @@ export default function productDetail({ params }) {
   //LOGIC ORDERING
   const [userId, setUserId] = useState();
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    setUserId(storedUser?._id);
+    const getCookie = Cookies.get('jwt')
+    const decodedCookie = jwtDecode(getCookie)
+    setUserId(decodedCookie.userId)
+
   }, []);
 
   const handleCart = async () => {
@@ -38,7 +43,7 @@ export default function productDetail({ params }) {
         body: JSON.stringify({
           user: userId,
           orderItems: {
-            qty: 1,
+            qty: qty,
             price: theProduct.price,
             product: theProduct._id,
           },
@@ -47,7 +52,6 @@ export default function productDetail({ params }) {
       const json = await response.json();
       if (response.ok) {
         console.log("berhasil order");
-        console.log(json);
       } else {
         console.log("gagal order");
       }
@@ -77,7 +81,14 @@ export default function productDetail({ params }) {
           </h1>
           <h3>Stock (kg) : {theProduct.countInStock}</h3>
           <h1>{theProduct.description}</h1>
-          <h1>{userId}</h1>
+          <NumberFormatBase
+              id="positiveNumber"
+              allowNegative={false}
+              allowLeadingZeros={false}
+              thousandSeparator={false}
+              onChange={(e) => setQty(e.target.value)}
+              isNumericString
+          />
           <button
             onClick={handleCart}
             className="text-white hover:bg-orange-800 w-full mx-auto font-semibold font-inter rounded-md text-sm px-4 py-2 text-center bg-button-100 "
