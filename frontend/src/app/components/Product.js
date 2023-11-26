@@ -12,8 +12,8 @@ const Product = ({ name, price, image, rating, id }) => {
     <div className="flex items-center p-[5%]  w-full justify-center">
       <Link href={`/products/${id}`}>
         <div
-          className="group flex w-[300px] h-[500px] flex-col  shadow-lg shadow-neutral-500 hover:scale-110 
-        transition ease-in-out duration-100 rounded-xl bg-secondary-700  "
+          className="group flex w-[300px] h-[400px] flex-col  shadow-lg shadow-neutral-500 hover:scale-110 
+        transition ease-in-out duration-100 rounded-xl bg-secondary-700  gap-10"
         >
           <div className="flex justify-center items-center">
             <Image
@@ -27,11 +27,11 @@ const Product = ({ name, price, image, rating, id }) => {
           <div className="flex flex-col items-center">
             <h1 className="font-bold text-[20px] ">{name}</h1>
             {/* <p>{description}</p> */}
-            <h1 className="font-semibold text-[18px]">{price}</h1>
+            <h1 className="font-semibold text-[18px]">{price} / kg</h1>
           </div>
 
           <h1 className="absolute bottom-9 3xl:bottom-10 right-[75px] 2xl:right-[25%] 3xl:right-[30%] group-hover:bottom-5 group-hover:right-[28px]">
-            {rating}
+            Rating : {rating}
           </h1>
         </div>
       </Link>

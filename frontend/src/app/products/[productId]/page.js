@@ -24,11 +24,17 @@ export default function productDetail({params}) {
 
   return (
     <div className='mt-[60px] p-6 w-[90%] m-auto'>
-      <h1 className='text-center'>Home Market {product.name}</h1>
+      <div className='text-center lg:text-left px-5 flex gap-9'>
+        <button>Home</button>
+        <button>Market</button>
+        <h1 className='font-inter font-bold'>{product.name}</h1>
+      </div>
       <div className='flex justify-between flex-col lg:flex-row p-4 gap-4'>
         <Image 
           className='w-[483px] h-[607px] rounded-xl'
-          src={city1} 
+          src={product.image} 
+          width={483}
+          height={550}
         />
         <div className='p-3 flex flex-col gap-5'>
           <h1 className='font-inter font-bold text-4xl'>{product.name}</h1>
