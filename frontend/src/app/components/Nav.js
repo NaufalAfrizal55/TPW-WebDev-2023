@@ -8,7 +8,7 @@ const Nav = () => {
   return (
     <nav className=" bg-nav fixed w-screen z-20 top-0 start-0 ">
       <div className="flex flex-wrap items-center justify-between gap-[8px] pr-[80px] pl-[66px]">
-        <a href="./" className="flex items-center rtl:space-x-reverse">
+        <a href="/" className="flex items-center rtl:space-x-reverse">
           <Image
             src={Logo}
             className="w-[160px] 2xl:w-[240px]"
@@ -20,8 +20,8 @@ const Nav = () => {
         </a>
 
         <div className="flex items-center gap-3 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <Link href="#">
-            <Image src={chat} width={36} alt="chat-icon"></Image>
+          <Link href="https://wa.me/+6288232863355">
+            <Image src={chat} width={36} alt="chat-icon" className="hover:bg-brown-100 rounded-full"></Image>
           </Link>
           <Link href="#">
             <Image href="#" src={cart} width={36} alt="cart-icon"></Image>
@@ -67,7 +67,7 @@ const Nav = () => {
           <ul className="flex flex-col p-3 md:p-3 mt-4 font-PoetsenOne border rounded-lg  md:space-x-[88px] rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
             <li>
               <Link
-                href="./#home"
+                href="/"
                 className="block py-2 px-3 text-text-900 hover:text-white md:bg-transparent md:p-0"
                 aria-current="page"
               >
@@ -76,7 +76,7 @@ const Nav = () => {
             </li>
             <li>
               <Link
-                href="./#product"
+                href="/#product"
                 className="block py-2 px-3 text-text-900 hover:text-white md:bg-transparent md:p-0  "
               >
                 Our Product
@@ -84,7 +84,7 @@ const Nav = () => {
             </li>
             <li>
               <Link
-                href="#"
+                href="/#process"
                 className="block py-2 px-3 text-text-900 hover:text-white md:bg-transparent md:p-0"
               >
                 Process

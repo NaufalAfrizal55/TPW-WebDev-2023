@@ -7,7 +7,6 @@ import "swiper/css/free-mode";
 
 import { FreeMode, Pagination } from "swiper/modules";
 
-import { ServiceData } from "../constants/page.js";
 import Product from "./Product.js";
 
 // export function productCard() {
@@ -83,6 +82,7 @@ const productCard = () => {
             price={item.price}
             rating={item.rating}
             id={item._id}
+            image={item.image}
           />
         </SwiperSlide>
       ))}

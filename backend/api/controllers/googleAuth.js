@@ -46,17 +46,16 @@ exports.authCallback = async(req, res) => {
     }
     try {
         const user = await User.findOne({ email: data.email });
-      
         if (!user || user.length === 0) {
-          const createUser = new User({
+          const createUser = User.create({
             email: data.email,
             username: data.name,
           })
           generateToken(res, createUser._id)
-        } 
-        
-        generateToken(res, user._id)
+        } else {
+            generateToken(res, user._id)
 
+        }
       } catch (error) {
         return res.status(400).json({error: error.message})
       }

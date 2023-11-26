@@ -14,7 +14,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
 
   const handleRedirect = () => {
-    // Replace 'https://example.com' with your desired external URL
     window.location.href = "http://localhost:5000/api/auth/google";
   };
 
@@ -42,19 +41,43 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify({ username, password, email }),
       });
 
       if (response.ok) {
-        console.log("berhasil logout client");
+        console.log("berhasil login client");
       } else {
-        console.log("gagal logout client");
+        console.log("gagal login client");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+    console.log(username, email, password);
+    window.location.href = "http://localhost:3000"
+  };
+  const handleSignup = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: 'include',
+        body: JSON.stringify({ username, password, email }),
+      });
+
+      if (response.ok) {
+        console.log("berhasil signup client");
+      } else {
+        console.log("gagal signup client");
       }
     } catch (error) {
       console.error("Error during login:", error);
     }
     window.location.href = "http://localhost:3000";
   };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <div className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
@@ -77,37 +100,37 @@ const Login = () => {
                   </div>
                 </button>
               </div>
-              <p className="text-gray-400 my-3">or use your email account</p>
+              <p className="text-gray-700 my-3">or use your email account</p>
               <div className="flex flex-col items-center">
-                <div className="bg-gray-100 w-64 p-2 flex items-center gap-2 mb-3">
+                <div className="bg-nav w-64 p-2 flex items-center gap-2 mb-3">
                   <IoIosMail className="text-gray-400" />
                   <input
                     type="username"
                     name="username"
                     placeholder="Username"
-                    className="bg-gray-100 outline-none text-sm flex-1"
+                    className="bg-nav outline-none text-sm  flex-1"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
-                <div className="bg-gray-100 w-64 p-2 flex items-center gap-2 mb-3">
+                <div className="bg-nav w-64 p-2 flex items-center gap-2 mb-3">
                   <IoIosMail className="text-gray-400" />
                   <input
                     type="email"
                     name="email"
                     placeholder="Email"
-                    className="bg-gray-100 outline-none text-sm flex-1"
+                    className="bg-nav outline-none text-sm flex-1"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                <div className="bg-gray-100 w-64 p-2 flex items-center gap-2">
+                <div className="bg-nav w-64 p-2 flex items-center gap-2">
                   <MdLockOutline className="text-gray-400" />
                   <input
                     type="password"
                     name="password"
                     placeholder="Passwords"
-                    className="bg-gray-100 outline-none text-sm flex-1"
+                    className="bg-nav outline-none text-sm flex-1"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -117,14 +140,14 @@ const Login = () => {
                 <button
                   onClick={handleLogin}
                   type="button"
-                  className="border-2 border-gray-300 text-black rounded-full px-8 py-2 inline-block font-semibold hover:bg-white hover:text-nav"
+                  className="border-2 border-blue-gray-300 text-black rounded-full px-8 py-2 inline-block font-semibold hover:bg-blue-gray-400 hover:text-nav"
                 >
                   Sign In
                 </button>
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="border-2 border-gray-300 text-black rounded-full px-8 py-2 inline-block font-semibold hover:bg-white hover:text-nav"
+                  className="border-2 border-blue-gray-300 text-black rounded-full px-8 py-2 inline-block font-semibold hover:bg-blue-gray-400 hover:text-nav"
                 >
                   Log Out
                 </button>
@@ -138,12 +161,12 @@ const Login = () => {
             <p className="text-gray-700 mb-6">
               Enter your personal details and start journey with us
             </p>
-            <Link
-              href="#"
-              className="border-2 border-white text-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-nav"
+            <button
+              onClick={handleSignup}
+              className="border-2 border-blue-gray-300 rounded-full px-12 py-2 inline-block font-semibold hover:bg-blue-gray-400 hover:text-nav"
             >
               Sign Up
-            </Link>
+            </button>
           </div>
         </div>
       </div>

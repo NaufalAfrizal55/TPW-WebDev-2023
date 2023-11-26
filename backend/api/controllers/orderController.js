@@ -1,58 +1,109 @@
 const Order = require('../models/orderModel')
 const OrderItem = require("../models/orderItem")
 
+function calcPrices(orderItems) {
+    const itemsPrice = orderItems.reduce(
+      (acc, item) => acc + item.price * item.qty,
+      0
+    );
+  
+    const shippingPrice = itemsPrice > 100 ? 0 : 10;
+    const taxRate = 0.15;
+    const taxPrice = (itemsPrice * taxRate).toFixed(2);
+  
+    const totalPrice = (
+      itemsPrice +
+      shippingPrice +
+      parseFloat(taxPrice)
+    ).toFixed(2);
+  
+    return {
+      itemsPrice: itemsPrice.toFixed(2),
+      shippingPrice: shippingPrice.toFixed(2),
+      taxPrice,
+      totalPrice,
+    };
+  }
+
 exports.getAllOrders = async(req, res) => {
-    const orderList = await Order.find().populate('user', 'name').sort({'dateOrdered': -1})
-    if(!orderList){
-        return res.status(404).json({message: "Cannot get order list"})
-    }
-    res.status(200).json(orderList)
+    try {
+        const orders = await Order.find({}).populate("user", "id username");
+        res.json(orders);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
 }
+
+// exports.getUserOrders = async (req, res) => {
+//     try {
+//       const orders = await Order.find({ user: req.user._id });
+//       res.json(orders);
+//     } catch (error) {
+//       res.status(500).json({ error: error.message });
+//     }
+//   };
 
 exports.getSingleOrder = async(req, res) =>{
     const order = await Order.findById(req.params.id)
     .populate('user', 'name')
-    .populate({ 
-        path: 'orderItems', populate: {
-            path : 'product', populate: 'category'} 
-        });
-
     if(!order) {
-        return res.status(500).json({message: 'cannto get an order'})
+        return res.status(500).json({message: 'cannot get an order'})
     } 
     res.status(200).json(order);
 }
 
 exports.createOrder = async(req, res) => {
-    const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) =>{
-        let newOrderItem = new OrderItem({
-            quantity: orderItem.quantity,
-            product: orderItem.product
-        })
-
-        newOrderItem = await newOrderItem.save();
-
-        return newOrderItem._id;
-    }))
-    const orderItemsIdsResolved =  await orderItemsIds;
-
-    const totalPrices = await Promise.all(orderItemsIdsResolved.map(async (orderItemId)=>{
-        const orderItem = await OrderItem.findById(orderItemId).populate('product', 'price');
-        const totalPrice = orderItem.product.price * orderItem.quantity;
-        return totalPrice
-    }))
-    const totalPrice = totalPrices.reduce((a,b) => a +b , 0);
-
-    //ADD DOC to DB
     try {
-        const order = await Order.create({orderItems: orderItemsIdsResolved,
-            totalPrice: totalPrice,
-            user: req.body.user})
-        res.status(200).json(order)
-    } catch(error){
-        res.status(400).json({message: "Cannot create an order"})
-    }    
-}
+        const { orderItems, shippingAddress, paymentMethod } = req.body;
+    
+        if (orderItems && orderItems.length === 0) {
+          res.status(400);
+          throw new Error("No order items");
+        }
+    
+        const itemsFromDB = await Product.find({
+          _id: { $in: orderItems.map((x) => x._id) },
+        });
+    
+        const dbOrderItems = orderItems.map((itemFromClient) => {
+          const matchingItemFromDB = itemsFromDB.find(
+            (itemFromDB) => itemFromDB._id.toString() === itemFromClient._id
+          );
+    
+          if (!matchingItemFromDB) {
+            res.status(404);
+            throw new Error(`Product not found: ${itemFromClient._id}`);
+          }
+    
+          return {
+            ...itemFromClient,
+            product: itemFromClient._id,
+            price: matchingItemFromDB.price,
+            _id: undefined,
+          };
+        });
+    
+        const { itemsPrice, taxPrice, shippingPrice, totalPrice } =
+          calcPrices(dbOrderItems);
+    
+        const order = new Order({
+          orderItems: dbOrderItems,
+          user: req.user._id,
+          shippingAddress,
+          paymentMethod,
+          itemsPrice,
+          taxPrice,
+          shippingPrice,
+          totalPrice,
+        });
+    
+        const createdOrder = await order.save();
+        res.status(201).json(createdOrder);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+}   
+
 
 exports.deleteOrder = (req, res) => {
     Order.findByIdAndRemove(req.params.id).then(async order =>{
