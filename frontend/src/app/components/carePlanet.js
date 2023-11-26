@@ -5,9 +5,9 @@ import Group2 from "../../../public/img/group2.svg";
 import Group3 from "../../../public/img/group3.svg";
 import Group4 from "../../../public/img/group4.svg";
 
-export function carePlanet() {
+export function carePlanet({ id }) {
   return (
-    <section className="h-screen w-full" id="process">
+    <section className="h-screen w-full" id={id}>
       <div>
         <h1 className="text-[48px] 2xl:text-[60px] mt-[100px] 2xl:mt-[150px] text-brown-900 font-inter text-center">
           A journey of <span className="font-bold">Responsibility</span> and{" "}

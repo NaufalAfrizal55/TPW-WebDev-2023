@@ -21,7 +21,12 @@ const Nav = () => {
 
         <div className="flex items-center gap-3 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <Link href="https://wa.me/+6288232863355">
-            <Image src={chat} width={36} alt="chat-icon" className="hover:bg-brown-100 rounded-full"></Image>
+            <Image
+              src={chat}
+              width={36}
+              alt="chat-icon"
+              className="hover:bg-brown-100 rounded-full"
+            ></Image>
           </Link>
           <Link href="#">
             <Image href="#" src={cart} width={36} alt="cart-icon"></Image>
@@ -76,15 +81,15 @@ const Nav = () => {
             </li>
             <li>
               <Link
-                href="/#product"
+                href="./#market"
                 className="block py-2 px-3 text-text-900 hover:text-white md:bg-transparent md:p-0  "
               >
-                Our Product
+                Market
               </Link>
             </li>
             <li>
               <Link
-                href="/#process"
+                href="./#process"
                 className="block py-2 px-3 text-text-900 hover:text-white md:bg-transparent md:p-0"
               >
                 Process
@@ -92,7 +97,7 @@ const Nav = () => {
             </li>
             <li>
               <Link
-                href="#"
+                href="./#aboutus"
                 className="block py-2 px-3 text-text-900 hover:text-white md:bg-transparent md:p-0"
               >
                 About Us
