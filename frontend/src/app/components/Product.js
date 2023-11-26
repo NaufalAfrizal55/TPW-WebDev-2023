@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import city1 from "../assets/city1.png";
 import Link from "next/link";
+import { RxArrowRight } from "react-icons/rx";
 
 //{name, description, price, countInStock, image, rating}
 
@@ -28,7 +29,9 @@ const Product = ({ name, price, image, rating, id }) => {
             {/* <p>{description}</p> */}
             <h1 className="font-semibold text-[18px]">{price} / kg</h1>
           </div>
-
+          <h1 className=" flex items-center justify-center gap-1 absolute bottom-9 3xl:bottom-10 left-[75px] 2xl:left-[25%] 3xl:left-[30%] group-hover:bottom-5 group-hover:left-[28px]">
+            Add to cart <RxArrowRight />
+          </h1>
           <h1 className="absolute bottom-9 3xl:bottom-10 right-[75px] 2xl:right-[25%] 3xl:right-[30%] group-hover:bottom-5 group-hover:right-[28px]">
             Rating : {rating}
           </h1>

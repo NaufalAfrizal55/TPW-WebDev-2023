@@ -70,7 +70,26 @@ const productCard = () => {
     <Swiper
       className=""
       modules={[FreeMode, Pagination]}
-      slidesPerView={3}
+      pagination={true}
+      breakpoints={
+        {
+          // when window width is >= 640px
+          0: {
+            slidesPerView: 1,
+          },
+          // when window width is >= 768px
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 15,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 15,
+          },
+        }
+        // slidesPerView={3}
+        // spaceBetween={15}
+      }
       onSlideChange={() => console.log("slide change")}
       onSwiper={(swiper) => console.log(swiper)}
     >

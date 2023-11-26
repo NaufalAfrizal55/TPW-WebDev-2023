@@ -1,13 +1,18 @@
+"use client";
+import React, { useState, useEffect } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../../public/logo/logo.svg";
 import cart from "../../../public/cart.svg";
 import chat from "../../../public/chat.svg";
+import Cookies from "js-cookie";
+// import { useRouter } from "next/router";
 
 const Nav = () => {
   return (
-    <nav className=" bg-nav fixed w-screen z-20 top-0 start-0 ">
-      <div className="flex flex-wrap items-center justify-between gap-[8px] pr-[80px] pl-[66px]">
+    <nav className=" bg-nav lg:fixed w-screen z-20">
+      <div className="flex items-center justify-normal lg:justify-between gap-0 lg:gap-[8px] lg:pr-[80px] lg:pl-[66px]">
         <a href="/" className="flex items-center rtl:space-x-reverse">
           <Image
             src={Logo}
@@ -19,7 +24,7 @@ const Nav = () => {
           </span> */}
         </a>
 
-        <div className="flex items-center gap-3 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex items-center lg:gap-3 md:order-2 mspace-x-1 lg:space-x-3 rtl:space-x-reverse">
           <Link href="https://wa.me/+6288232863355">
             <Image
               src={chat}
@@ -38,6 +43,23 @@ const Nav = () => {
           >
             Sign In
           </Link>
+          {/* {token ? (
+            <button
+              onClick={handleLogout}
+              type="button"
+              className="text-white hover:bg-orange-800 font-semibold font-inter rounded-[53px] text-sm px-4 py-2 text-center bg-button-100 "
+            >
+              Log Out
+            </button>
+          ) : (
+            <Link
+              href="/login"
+              type="button"
+              className="text-white hover:bg-orange-800 font-semibold font-inter rounded-[53px] text-sm px-4 py-2 text-center bg-button-100 "
+            >
+              Sign In
+            </Link>
+          )} */}
 
           <button
             data-collapse-toggle="navbar-sticky"
@@ -69,7 +91,7 @@ const Nav = () => {
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-sticky"
         >
-          <ul className="flex flex-col p-3 md:p-3 mt-4 font-PoetsenOne border rounded-lg  md:space-x-[88px] rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
+          <ul className="flex flex-col items-center p-3 md:p-3 mt-4 font-PoetsenOne border rounded-lg  md:space-x-[88px] rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
             <li>
               <Link
                 href="/"
@@ -95,10 +117,10 @@ const Nav = () => {
                 Process
               </Link>
             </li>
-            <li>
+            <li className="">
               <Link
                 href="./#aboutus"
-                className="block py-2 px-3 text-text-900 hover:text-white md:bg-transparent md:p-0"
+                className="block lg:py-2 lg:px-3 text-text-900 hover:text-white md:bg-transparent md:p-0"
               >
                 About Us
               </Link>
@@ -113,3 +135,29 @@ const Nav = () => {
 };
 
 export default Nav;
+
+// const navigate = useRouter();
+// const [token, setToken] = useState();
+
+// useEffect(() => {
+//   const token = Cookies.get();
+//   console.log(token);
+//   setToken(token);
+// }, []);
+
+// const handleLogout = async () => {
+//   try {
+//     const response = await fetch("http://localhost:5000/api/auth/logout", {
+//       method: "POST",
+//       credentials: "include", //HARUS ADA INI
+//     });
+//     if (response.ok) {
+//       console.log("berhasil logout client");
+//     } else {
+//       console.log("gagal logout client");
+//     }
+//   } catch (error) {
+//     console.error("Error during login:", error);
+//   }
+//   window.location.href = "http://localhost:3000";
+// };
