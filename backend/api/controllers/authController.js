@@ -23,9 +23,10 @@ exports.signup = async(req, res) => {
 
     try {
         //CREATE & STORE USER
-        const newUser = User.create({ username, email, password: hashPW, isAdmin })
+        const newUser = new User({ username, email, password: hashPW, isAdmin })
+        await newUser.save()
         generateToken(res, newUser._id)
-        console.log(newUser);
+
         res.status(201).json({
             _id: newUser._id,
             username: newUser.username,
@@ -56,7 +57,7 @@ exports.login = async(req, res) => {
         return res.status(401).json({message: 'Unauthorized (wrong password)'})
     } 
         generateToken(res, foundUser._id)
-        console.log(foundUser);
+
         res.status(201).json({
             _id: foundUser._id,
             username: foundUser.username,

@@ -47,10 +47,11 @@ exports.authCallback = async(req, res) => {
     try {
         const user = await User.findOne({ email: data.email });
         if (!user || user.length === 0) {
-          const createUser = User.create({
+          const createUser = new User ({
             email: data.email,
             username: data.name,
           })
+          await createUser.save()
           generateToken(res, createUser._id)
         } else {
             generateToken(res, user._id)
