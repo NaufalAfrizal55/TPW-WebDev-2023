@@ -25,14 +25,21 @@ export default function productDetail({ params }) {
 
   //LOGIC ORDERING
   const [userId, setUserId] = useState();
-  useEffect(() => {
-    const getCookie = Cookies.get('jwt')
-    const decodedCookie = jwtDecode(getCookie)
-    setUserId(decodedCookie.userId)
+  // useEffect(() => {
+  //   const getCookie = Cookies.get('jwt')
+  //   const decodedCookie = jwtDecode(getCookie)
+  //   setUserId(decodedCookie.userId)
 
-  }, []);
+  // }, []);
 
   const handleCart = async () => {
+    const getCookie = Cookies.get('jwt')
+    if(!getCookie){
+      alert("anda belum login")
+      return window.location.href = `http://localhost:3000/products/${params.productId}`
+    }
+    const decodedCookie = jwtDecode(getCookie)
+    setUserId(decodedCookie.userId)
     try {
       const response = await fetch("http://localhost:5000/api/order", {
         method: "POST",

@@ -12,6 +12,12 @@ const myOrder = () => {
 //FETCH USER FROM LOCALSTORAGE & DATA ORDER
   useEffect(() => {
     //GET COOKIE (NOT SECURE, TPI GPP)
+    const checkCookie = document.cookie
+    if(!checkCookie) {
+      alert("anda belum login")
+      return window.location.href = "http://localhost:3000"
+    }
+    
     const getCookie = Cookies.get('jwt')
     const decodedCookie = jwtDecode(getCookie)
     const fetchData = async () => {
