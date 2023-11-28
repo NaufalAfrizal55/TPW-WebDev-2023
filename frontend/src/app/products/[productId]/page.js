@@ -25,21 +25,18 @@ export default function productDetail({ params }) {
 
   //LOGIC ORDERING
   const [userId, setUserId] = useState();
-  // useEffect(() => {
-  //   const getCookie = Cookies.get('jwt')
-  //   const decodedCookie = jwtDecode(getCookie)
-  //   setUserId(decodedCookie.userId)
-
-  // }, []);
-
-  const handleCart = async () => {
+  useEffect(() => {
     const getCookie = Cookies.get('jwt')
     if(!getCookie){
-      alert("anda belum login")
-      return window.location.href = `http://localhost:3000/products/${params.productId}`
+      alert("Anda belum login. Tolong login dulu")
+      window.location.href = "http://localhost:3000"
     }
     const decodedCookie = jwtDecode(getCookie)
     setUserId(decodedCookie.userId)
+
+  }, []);
+
+  const handleCart = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/order", {
         method: "POST",
@@ -58,7 +55,8 @@ export default function productDetail({ params }) {
       });
       const json = await response.json();
       if (response.ok) {
-        console.log("berhasil order");
+        alert("berhasil order");
+        window.location.href = `http://localhost:3000/products/${params.productId}`
       } else {
         console.log("gagal order");
       }
@@ -88,7 +86,9 @@ export default function productDetail({ params }) {
           </h1>
           <h3>Stock (kg) : {theProduct.countInStock}</h3>
           <h1>{theProduct.description}</h1>
+          <h3 className="mt-6">Add Quantity :</h3>
           <NumberFormatBase
+              className="bg-gradient-to-br from-[#E9DFDB]  via-[#E5C4B9] to-[#E8D8D3] rounded-xl"
               id="positiveNumber"
               allowNegative={false}
               allowLeadingZeros={false}
