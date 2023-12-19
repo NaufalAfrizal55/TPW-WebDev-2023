@@ -74,3 +74,7 @@ exports.logout = (req, res) => {
         })
     res.status(200).json({ message: "Logged out successfully" })
 }
+
+exports.checkCookie = (req, res) => {
+    res.json(req.cookies.jwt);
+  }

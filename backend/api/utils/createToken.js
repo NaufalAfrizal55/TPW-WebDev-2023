@@ -7,8 +7,8 @@ const generateToken = (res, userId) => {
         {expiresIn: '7d'})
     
     res.cookie('jwt', token, {
-        httpOnly: false,        //ga baik tpi gpp
-        secure: true,  
+        httpOnly: true,
+        secure: true,
         sameSite: 'None', 
         maxAge: 7 * 24 * 60 * 60 * 1000 //batas cookie 7 hari
     })
