@@ -7,9 +7,9 @@ import { RxArrowRight } from "react-icons/rx";
 //{name, description, price, countInStock, image, rating}
 
 //CSS UTK TIAP KOTAK DI SINI
-const Product = ({ name, price, image, rating, id }) => {
+const Product = ({ name, price, image, rating, id, alt }) => {
   return (
-    <div className="flex items-center p-[5%]  w-full justify-center">
+    <div className="flex items-center p-[5%]  w-full justify-center" key={id}>
       <Link href={`/products/${id}`}>
         <div
           className="group flex w-[300px] h-[400px] flex-col  shadow-lg shadow-neutral-100 hover:scale-110 
@@ -21,7 +21,7 @@ const Product = ({ name, price, image, rating, id }) => {
               src={image}
               width={200}
               height={300}
-              alt="product"
+              alt={alt}
             />
           </div>
           <div className="flex flex-col items-center">

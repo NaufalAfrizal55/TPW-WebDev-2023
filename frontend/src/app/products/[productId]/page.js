@@ -3,9 +3,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { NumberFormatBase } from "react-number-format";
+import axios from "axios";
 
 export default function productDetail({ params }) {
   const [theProduct, setTheProduct] = useState([]);
@@ -13,11 +13,10 @@ export default function productDetail({ params }) {
   useEffect(() => {
     //FETCH PRODUCT FROM DB
     const fetchData = async () => {
-      const res = await fetch(
+      const response = await axios.get(
         `http://localhost:5000/api/products/${params.productId}`
       );
-      const result = await res.json();
-      setTheProduct(result);
+      setTheProduct(response.data);
     };
 
     fetchData();
@@ -25,43 +24,73 @@ export default function productDetail({ params }) {
 
   //LOGIC ORDERING
   const [userId, setUserId] = useState();
+  const [cookie, setCookie] = useState();
   useEffect(() => {
-    const getCookie = Cookies.get('jwt')
-    if(!getCookie){
-      alert("Anda belum login. Tolong login dulu")
-      window.location.href = "http://localhost:3000"
+    const checkCookie = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/auth/check-cookie", {
+          withCredentials: true,
+        });
+        if (response && response.data) {
+          setCookie(response.data);
+        } else {
+          setCookie(null);
+        }
+      } catch (error) {
+        //HANDLE ERROR
+        if (error.response && error.response.status === 401) {
+          console.log('Unauthorized ');
+        } else {
+          console.log('Error checking cookie:');
+          setCookie(null);
+        }
+      }
+    };
+    checkCookie()
+    if(cookie){
+      const decodedCookie = jwtDecode(cookie)
+      return setUserId(decodedCookie.userId)
     }
-    const decodedCookie = jwtDecode(getCookie)
-    setUserId(decodedCookie.userId)
+    // const decodedCookie = jwtDecode(cookie)
+    // setUserId(decodedCookie.userId)
+    // console.log(userId);
+    // const getCookie = Cookies.get('jwt')
+    // if(!getCookie){
+    //   alert("Anda belum login. Tolong login dulu")
+    //   window.location.href = "http://localhost:3000"
+    // }
+    // const decodedCookie = jwtDecode(getCookie)
+    // setUserId(decodedCookie.userId)
 
-  }, []);
+  }, [userId, cookie]);
 
   const handleCart = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/api/order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
+    if(userId){
+      try {
+        const response = await axios.post("http://localhost:5000/api/order", 
+        {
           user: userId,
           orderItems: {
             qty: qty,
             price: theProduct.price,
             product: theProduct._id,
+          }
+        },  {
+          headers: {
+            'Content-Type': 'application/json',
           },
-        }),
-      });
-      const json = await response.json();
-      if (response.ok) {
-        alert("berhasil order");
-        window.location.href = `http://localhost:3000/products/${params.productId}`
-      } else {
-        console.log("gagal order");
+          withCredentials: true,
+        })
+        if (response.status === 201) {
+          alert("berhasil order");
+          // window.location.href = `http://localhost:3000/products/${params.productId}`
+          window.location.reload()
+        } else {
+          console.log("gagal order");
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
       }
-    } catch (error) {
-      console.error("Error during login:", error);
     }
   };
 
@@ -78,6 +107,7 @@ export default function productDetail({ params }) {
           src={theProduct.image}
           width={483}
           height={550}
+          alt="product pict"
         />
         <div className="p-3 flex flex-col gap-5">
           <h1 className="font-inter font-bold text-4xl">{theProduct.name}</h1>
@@ -90,18 +120,26 @@ export default function productDetail({ params }) {
           <NumberFormatBase
               className="bg-gradient-to-br from-[#E9DFDB]  via-[#E5C4B9] to-[#E8D8D3] rounded-xl"
               id="positiveNumber"
-              allowNegative={false}
-              allowLeadingZeros={false}
-              thousandSeparator={false}
+              allownegative="false"
+              allowleadingzeros="false"
+              thousandseparator="false"
               onChange={(e) => setQty(e.target.value)}
-              isNumericString
+              isnumericstring="true"
           />
-          <button
+          {userId ? 
+          (<button 
             onClick={handleCart}
             className="text-white hover:bg-orange-800 w-full mx-auto font-semibold font-inter rounded-md text-sm px-4 py-2 text-center bg-button-100 "
           >
             Add to Cart
-          </button>
+          </button>) : 
+          (<button 
+            onClick={(e)=> alert("anda belum login")}
+            className="text-white hover:bg-orange-800 w-full mx-auto font-semibold font-inter rounded-md text-sm px-4 py-2 text-center bg-button-100 "
+          >
+            Add to Cart
+          </button>)
+          }
         </div>
       </div>
     </div>

@@ -8,15 +8,15 @@ import "swiper/css/free-mode";
 import { FreeMode, Pagination } from "swiper/modules";
 
 import Product from "./Product.js";
+import axios from "axios";
 
 const productCard = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     //FETCH ALL PRODUCTS FROM DB
     const fetchData = async () => {
-      const res = await fetch("http://localhost:5000/api/products");
-      const result = await res.json();
-      setData(result);
+      const response = await axios.get("http://localhost:5000/api/products");
+      setData(response.data);
     };
 
     fetchData();
@@ -24,7 +24,6 @@ const productCard = () => {
 
   return (
     <Swiper
-      className=""
       modules={[FreeMode, Pagination]}
       pagination={true}
       breakpoints={
@@ -46,18 +45,19 @@ const productCard = () => {
         // slidesPerView={3}
         // spaceBetween={15}
       }
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
+      // onSlideChange={() => console.log("slide change")}
+      // onSwiper={(swiper) => console.log(swiper)}
     >
       {/* RENDER FOR ALL PRODUCTS */}
       {data.map((item) => (
-        <SwiperSlide className="gap-4 mb-[30px]">
+        <SwiperSlide className="gap-4 mb-[30px]" key={item._id}>
           <Product
             name={item.name}
             price={item.price}
             rating={item.rating}
             id={item._id}
             image={item.image}
+            alt={`Product: ${item.name}`}
           />
         </SwiperSlide>
       ))}

@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { IoIosMail } from "react-icons/io";
 import { MdLockOutline } from "react-icons/md";
@@ -10,15 +11,14 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleRedirect = () => {
+  const handleRedirectGoogle = () => {
     window.location.href = "http://localhost:5000/api/auth/google";
   };
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/logout", {
-        method: "POST",
-        credentials: "include", //HARUS ADA INI
+      const response = await axios.post("http://localhost:5000/api/auth/logout", {
+        withCredentials: true,//HARUS ADA INI
       });
       if (response.ok) {
         console.log("berhasil logout client");
@@ -55,22 +55,24 @@ const Login = () => {
   };
   const handleSignup = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
-        method: "POST",
+      const response = await axios.post('http://localhost:5000/api/auth/signup', {
+        username,
+        password,
+        email,
+      }, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        credentials: "include",
-        body: JSON.stringify({ username, password, email }),
+        withCredentials: true,
       });
-      const json = await response.json();
-      if (response.ok) {
-        console.log("berhasil signup client");
+    
+      if (response.status === 200) {
+        console.log('berhasil signup client');
       } else {
-        console.log("gagal signup client");
+        console.log('gagal signup client');
       }
     } catch (error) {
-      console.error("Error during login:", error);
+      console.error('Terjadi kesalahan:', error.message);
     }
     window.location.href = "http://localhost:3000";
   };
@@ -90,7 +92,7 @@ const Login = () => {
               <div className="flex justify-center my-2">
                 <button
                   type="button"
-                  onClick={handleRedirect}
+                  onClick={handleRedirectGoogle}
                   className="border-2 border-gray-200 rounded-full p-3 mx-1"
                 >
                   <div className="flex">

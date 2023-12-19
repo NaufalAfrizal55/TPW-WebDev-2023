@@ -6,8 +6,52 @@ import Link from "next/link";
 import Logo from "../../../public/logo/logo.svg";
 import cart from "../../../public/cart.svg";
 import chat from "../../../public/chat.svg";
+import axios from "axios";
 
 const Nav = () => {
+  const [cookie, setCookie] = useState()
+  useEffect(() => {
+    const checkCookie = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/auth/check-cookie", {
+          withCredentials: true,
+        });
+        if (response && response.data) {
+          setCookie(response.data);
+        } else {
+          setCookie(null);
+        }
+      } catch (error) {
+        //HANDLE ERROR
+        if (error.response && error.response.status === 401) {
+          console.log('Unauthorized ');
+        } else {
+          console.log('Error checking cookie:');
+          setCookie(null);
+        }
+      }
+    };
+  
+    checkCookie();
+  }, []);
+  
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/auth/logout", {
+        withCredentials: true,
+      });
+      if (response.ok) {
+        console.log("berhasil logout client");
+      } else {
+        console.log("gagal logout client");
+      }
+    } catch (error) {
+      console.log("Error during login:");
+    }
+    window.location.reload();
+  };
+
   return (
     <nav className=" bg-nav w-screen z-20">
       <div className="flex items-center justify-normal lg:justify-between gap-0 lg:gap-[8px] lg:pr-[80px] lg:pl-[66px]">
@@ -16,6 +60,7 @@ const Nav = () => {
             src={Logo}
             className="w-[160px] 2xl:w-[240px]"
             alt="BeanMasters Logo"
+            priority={true}
           />
         </a>
 
@@ -37,13 +82,22 @@ const Nav = () => {
               className="hover:bg-brown-50 rounded-full"
             ></Image>
           </Link>
+          {cookie ? (
+          <Link
+            href="/"
+            type="button"
+            onClick={handleLogout}
+            className="text-white  hover:bg-brown-300 font-semibold font-inter rounded-[53px] text-sm px-4 py-2 text-center bg-button-100 "
+          >
+            Log Out
+          </Link>) : (
           <Link
             href="/login"
             type="button"
-            className="text-white hover:bg-brown-300 font-semibold font-inter rounded-[53px] text-sm px-4 py-2 text-center bg-button-100 "
+            className="text-white  hover:bg-brown-300 font-semibold font-inter rounded-[53px] text-sm px-4 py-2 text-center bg-button-100 "
           >
             Sign In
-          </Link>
+          </Link>) }
 
           <button
             data-collapse-toggle="navbar-sticky"
