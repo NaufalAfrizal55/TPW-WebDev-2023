@@ -43,7 +43,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div href className="flex gap-4 items-center lg:mt-2 2xl:mt-2 ">
+            <div className="flex gap-4 items-center lg:mt-2 2xl:mt-2 ">
               <Link href="/#product">
                 <Image
                   src={ourProduct}
@@ -51,10 +51,11 @@ export default function Home() {
                   alt="our product"
                 ></Image>
               </Link>
-              <Link href="/login" alt="join now">
+              <Link href="/login">
                 <Image
                   src={joinNow}
                   className="w-[126px] 2xl:w-[200px] hover:scale-110"
+                  alt="join now"
                 ></Image>
               </Link>
             </div>

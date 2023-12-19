@@ -15,6 +15,7 @@ const Intensitiviti = ({ id }) => {
           <Image
             src={Planet}
             className="w-[500px] 2xl:w-[600px] 3xl:w-[753px] justify-end animate-spin-slow"
+            alt="planet"
           />
         </div>
         <div className="lg:w-[59%] grid grid-rows-4">

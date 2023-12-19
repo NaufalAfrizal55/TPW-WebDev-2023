@@ -19,22 +19,22 @@ export function carePlanet({ id }) {
       <div className="grid grid-rows-4 lg:grid-rows-none lg:grid lg:grid-cols-2 justify-center items-center mb-[50px] mt-8 mx-10 gap-5 2xl:gap-[52px] ">
         <div className="hover:scale-125 md:hover:scale-110 hover:bg-page hover:shadow-lg hover:rounded-lg hover:shadow-neutral-500 p-4 transition ease-in-out duration-200 ">
           <div>
-            <Image src={Group1} alt={"grup1"} />
+            <Image src={Group1} alt="grup1" />
           </div>
         </div>
         <div className="hover:scale-125  md:hover:scale-110 hover:bg-page hover:shadow-lg hover:rounded-lg hover:shadow-neutral-500 p-4 transition ease-in-out duration-200 ">
           <div>
-            <Image src={Group2} alt={"grup2"} />
+            <Image src={Group2} alt="grup2" />
           </div>
         </div>
         <div className="hover:scale-125 md:hover:scale-110 hover:bg-page hover:shadow-lg hover:rounded-lg hover:shadow-neutral-500 p-4 transition ease-in-out duration-200 ">
           <div>
-            <Image src={Group3} alt={"grup3"} />
+            <Image src={Group3} alt="grup3" />
           </div>
         </div>
         <div className="hover:scale-125 md:hover:scale-110 hover:bg-page hover:shadow-lg hover:rounded-lg hover:shadow-neutral-500 p-4 transition ease-in-out duration-200 ">
           <div>
-            <Image src={Group4} alt={"grup4"} />
+            <Image src={Group4} alt="grup4" />
           </div>
         </div>
       </div>

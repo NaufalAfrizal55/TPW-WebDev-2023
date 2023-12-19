@@ -14,15 +14,16 @@ const Footer = () => {
           <Image
             src={Logo}
             className=" w-[280px] 2xl:w-[380px] 3xl:w-[402px] "
+            alt="logo"
           />
         </div>
         <div className="p-5 text-center md:text-left md:basis-[30%] text-neutral-900">
           <ul>
             <li className=" text-md pb-2 font-semibold hover:text-brown-300 cursor-pointer">
-              <Link href={"#home"}>Home</Link>
+              <Link href="/">Home</Link>
             </li>
             <li className=" text-md pb-2 font-semibold hover:text-brown-300 cursor-pointer">
-              <Link href={"#market"}>Market</Link>
+              <Link href="/">Market</Link>
             </li>
             <li className=" text-md pb-2 font-semibold hover:text-brown-300 cursor-pointer">
               Process
@@ -38,7 +39,7 @@ const Footer = () => {
               Get in touch
             </li>
             <li className="flex justify-start items-center gap-2 text-md pb-2 font-semibold hover:text-brown-300 cursor-pointer my-3 3xl:text-[20px]">
-              <FaWhatsapp></FaWhatsapp> <Link href={"#"}>+628123456789</Link>
+              <FaWhatsapp></FaWhatsapp> <Link href="#">+628123456789</Link>
             </li>
             <li className="flex justify-start items-center gap-2 text-md pb-2 font-semibold hover:text-brown-300 cursor-pointer my-3 3xl:text-[20px]">
               <MdOutlineEmail></MdOutlineEmail>
@@ -51,6 +52,7 @@ const Footer = () => {
           <Image
             src={LogoWorldCoffee}
             className="w-[280px] 2xl:w-[380px] 3xl:w-[402px] "
+            alt="logo World Coffee"
           />
         </div>
       </div>
