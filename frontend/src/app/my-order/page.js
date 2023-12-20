@@ -10,6 +10,7 @@ const myOrder = () => {
   const [allOrder, setAllOrder] = useState([])
   const [cookie, setCookie] = useState()
   const [userId, setUserId] = useState()
+  const [user, setUser] = useState()
 
 useEffect(() => {
   const fetchData = async () => {
@@ -22,9 +23,10 @@ useEffect(() => {
       if (cookieResponse && cookieResponse.data) {
         setCookie(cookieResponse.data);
 
-        // 2. Jika cookie ada, dekode dan set userId
-        const decodedCookie = jwtDecode(cookieResponse.data);
-        setUserId(decodedCookie.userId);
+        // 2. Jika cookie ada, dekode dan set userId & user
+        const decodedCookie = jwtDecode(cookieResponse.data)
+        setUserId(decodedCookie.userId)
+        setUser(decodedCookie.username)
 
         // 3. Ambil data order berdasarkan userId
         const orderResponse = await axios.get(`http://localhost:5000/api/order/${decodedCookie.userId}`);
@@ -48,7 +50,6 @@ useEffect(() => {
   };
 
   fetchData()
-  console.log(allOrder);
 }, []); 
 
   // useEffect(() => {
@@ -123,7 +124,7 @@ useEffect(() => {
     <div className='w-[70%] h-full mx-auto p-6'>
       {allOrder ? ( 
       <div>
-        <h1>Shopping Cart</h1>
+        <h1>Shopping Cart :  {user}</h1>
         {allOrder && allOrder.map((order) => ( 
         <div className='rounded-lg my-3 text-center ' key={order._id}>
           <div className='flex justify-center border-blue-gray-800 rounded-lg bg-blue-gray-700 p-4 gap-3'>
@@ -131,6 +132,7 @@ useEffect(() => {
             src={order.orderItems.product.image}
             width={80}
             height={80}
+            alt='product'
             className='rounded-lg'
             />
             <div className='h-full'>

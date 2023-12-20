@@ -53,7 +53,7 @@ const Nav = () => {
   };
 
   return (
-    <nav className=" bg-nav w-screen z-20">
+    <nav className=" bg-nav w-full z-20">
       <div className="flex items-center justify-normal lg:justify-between gap-0 lg:gap-[8px] lg:pr-[80px] lg:pl-[66px]">
         <a href="/" className="flex items-center rtl:space-x-reverse">
           <Image

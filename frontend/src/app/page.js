@@ -145,7 +145,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <CarePlanet id="process" />
+      {/* <CarePlanet id="process" /> */}
       <Intensitiviti id="aboutus" />
       <Contact />
     </main>

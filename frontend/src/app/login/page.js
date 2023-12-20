@@ -33,24 +33,24 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
+      const response = await axios.post("http://localhost:5000/api/auth/login", {
+        username,
+        password,
+        email
+      }, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        credentials: "include",
-        body: JSON.stringify({ username, password, email }),
-      });
-      const json = await response.json();
-      if (response.ok) {
-        console.log("berhasil login client");
+        withCredentials: true,
+      })
+      if (response.status === 200) {
+        console.log('berhasil login client');
       } else {
-        console.log("gagal login client");
+        console.log('gagal login client');
       }
     } catch (error) {
       console.error("Error during login:", error);
     }
-    console.log(username, email, password);
     window.location.href = "http://localhost:3000";
   };
   const handleSignup = async () => {

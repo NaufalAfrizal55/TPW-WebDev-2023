@@ -52,9 +52,9 @@ exports.authCallback = async(req, res) => {
             username: data.name,
           })
           await createUser.save()
-          generateToken(res, createUser._id)
+          generateToken(res, createUser._id, user.username)
         } else {
-            generateToken(res, user._id)
+            generateToken(res, user._id, user.username)
         }
       } catch (error) {
         return res.status(400).json({error: error.message})

@@ -25,7 +25,7 @@ exports.signup = async(req, res) => {
         //CREATE & STORE USER
         const newUser = new User({ username, email, password: hashPW, isAdmin })
         await newUser.save()
-        generateToken(res, newUser._id)
+        generateToken(res, newUser._id, newUser.username)
 
         res.status(201).json({
             _id: newUser._id,
@@ -50,13 +50,16 @@ exports.login = async(req, res) => {
     if(!foundUser){
         return res.status(401).json({message: 'Unauthorized (no email found)'})
     }
+    if(!foundUser.password){
+        return res.status(400).json({message:"You don't create account from the web. Please try login with google"})
+    }
 
     //CEK PW benar belum
-    const match = bcrypt.compareSync(password, foundUser.password)
+    const match = bcrypt.compareSync(password, foundUser.password) 
     if(!match){
         return res.status(401).json({message: 'Unauthorized (wrong password)'})
     } 
-        generateToken(res, foundUser._id)
+        generateToken(res, foundUser._id, foundUser.username)
 
         res.status(201).json({
             _id: foundUser._id,
