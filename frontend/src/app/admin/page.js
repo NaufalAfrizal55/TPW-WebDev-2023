@@ -52,7 +52,7 @@ const admin = () => {
   return (
     <div>
         {data && data.map((order) => (
-            <div className='rounded-lg my-3 text-center' key={order._id}>
+            <div className='rounded-lg my-3 text-center min-h-[70vh]' key={order._id}>
                 <div className='flex justify-center border-blue-gray-800 rounded-lg bg-blue-gray-700 p-4 gap-3'>
                     <h1>{order.orderItems.product.name}</h1>
                     <h1>{order.user.username}</h1>
