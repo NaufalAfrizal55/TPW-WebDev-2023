@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import ourProduct from "../../public/btn_ourProduct.svg";
 import joinNow from "../../public/btn_join.svg";
@@ -11,11 +12,45 @@ import CarePlanet from "./components/carePlanet";
 import Intensitiviti from "./components/intensitiviti";
 import Contact from "./components/contact";
 import { RxArrowRight } from "react-icons/rx";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 export default function Home() {
+  const [cookie, setCookie] = useState()
+  useEffect(() => {
+    const checkCookie = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/auth/check-cookie", {
+          withCredentials: true,
+        });
+        if (response && response.data) {
+          setCookie(response.data);
+          const decodedCookie = jwtDecode(response.data)
+
+          if(decodedCookie.isAdmin){
+            window.location.href = "http://localhost:3000/admin"
+          }
+        } else {
+          setCookie(null);
+        }
+      } catch (error) {
+        //HANDLE ERROR
+        if (error.response && error.response.status === 401) {
+          console.log('Unauthorized ', error);
+        } else {
+          console.log('Error checking cookie:', error);
+          setCookie(null);
+        }
+      }
+    };
+  
+    checkCookie();
+  }, []);
+
   return (
     <main id="home" className=" overflow-hidden">
-      <section className="h-screen w-full flex flex-col lg:flex-row ">
+      <section className="h-full lg:h-screen w-full flex flex-col lg:flex-row ">
         {/* Headline */}
         <div className="basis-[45%] flex items-center pl-10 lg:pl-32 mt-[50px] mb-6 lg:mb-auto lg:mt-auto">
           <div>
@@ -43,7 +78,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="flex gap-4 items-center lg:mt-2 2xl:mt-2 ">
+            <div className="flex gap-4 items-center lg:mt-2 2xl:mt-2">
               <Link href="/#product">
                 <Image
                   src={ourProduct}
@@ -63,19 +98,19 @@ export default function Home() {
         </div>
 
         {/* Hero */}
-        <div className="relative basis-[55%] flex flex-row items-center justify-end overflow-hidden">
-          <div className="relative -z-10">
+        <div className="relative basis-[55%] flex flex-row items-center justify-end lg:overflow-hidden">
+          <div className="relative -z-10 w-full">
             <Image
               src={heroSquare}
-              className="w-[320px] 2xl:w-[480px] 3xl:w-[666px]"
+              className="w-[320px] 2xl:w-[480px] m-auto 3xl:w-[666px]"
               alt="heroSquare"
             ></Image>
             {/* width={450}*/}
           </div>
-          <div className="absolute inset-0 flex items-center justify-end rotate-[-3.15deg] hover:scale-110 lg:scale-100">
+          <div className="absolute inset-0 flex items-center justify-end w-full rotate-[-3.15deg] hover:scale-110 transition ease-in-out duration-100 lg:scale-100">
             <Image
               src={kopiIcon}
-              className="w-[620px] 2xl:w-[720px] 3xl:w-[987.5px]"
+              className="w-[620px] 2xl:w-[720px] 3xl:w-[987.5px]  m-auto"
               alt="kopiIcon"
               priority={true}
             ></Image>
@@ -85,7 +120,7 @@ export default function Home() {
       </section>
 
       {/* Our Products */}
-      <section className=" w-full" id="market">
+      <section className="w-full" id="market">
         <div className="skew-y-[4deg] mt-[80px] 3xl:mt-[104px] px-1">
           <div className="relative flex overflow-x-hidden justify-center items-center text-white h-[80px] bg-text-800">
             <div className="animate-marquee whitespace-nowrap">
@@ -145,7 +180,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* <CarePlanet id="process" /> */}
+      <CarePlanet id="process" />
       <Intensitiviti id="aboutus" />
       <Contact />
     </main>

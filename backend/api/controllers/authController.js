@@ -25,7 +25,7 @@ exports.signup = async(req, res) => {
         //CREATE & STORE USER
         const newUser = new User({ username, email, password: hashPW, isAdmin })
         await newUser.save()
-        generateToken(res, newUser._id, newUser.username)
+        generateToken(res, newUser._id, newUser.username, newUser.isAdmin)
 
         res.status(201).json({
             _id: newUser._id,
@@ -59,7 +59,7 @@ exports.login = async(req, res) => {
     if(!match){
         return res.status(401).json({message: 'Unauthorized (wrong password)'})
     } 
-        generateToken(res, foundUser._id, foundUser.username)
+        generateToken(res, foundUser._id, foundUser.username, foundUser.isAdmin)
 
         res.status(201).json({
             _id: foundUser._id,

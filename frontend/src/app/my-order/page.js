@@ -8,9 +8,8 @@ import axios from 'axios'
 
 const myOrder = () => {
   const [allOrder, setAllOrder] = useState([])
-  const [cookie, setCookie] = useState()
-  const [userId, setUserId] = useState()
   const [user, setUser] = useState()
+  let totalPrice = 0
 
 useEffect(() => {
   const fetchData = async () => {
@@ -21,19 +20,18 @@ useEffect(() => {
       });
       
       if (cookieResponse && cookieResponse.data) {
-        setCookie(cookieResponse.data);
 
         // 2. Jika cookie ada, dekode dan set userId & user
         const decodedCookie = jwtDecode(cookieResponse.data)
-        setUserId(decodedCookie.userId)
         setUser(decodedCookie.username)
 
+        if(decodedCookie.isAdmin){
+          window.location.href = "http://localhost:3000/admin"
+        }
         // 3. Ambil data order berdasarkan userId
         const orderResponse = await axios.get(`http://localhost:5000/api/order/${decodedCookie.userId}`);
         setAllOrder(orderResponse.data);
       } else {
-        setCookie(null);
-        setUserId(null);
         setAllOrder([]);
       }
     } catch (error) {
@@ -42,8 +40,6 @@ useEffect(() => {
         console.log('Unauthorized ');
       } else {
         console.log('Error:', error.message);
-        setCookie(null);
-        setUserId(null);
         setAllOrder([]);
       }
     }
@@ -52,73 +48,9 @@ useEffect(() => {
   fetchData()
 }, []); 
 
-  // useEffect(() => {
-  //   const checkCookie = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:5000/api/auth/check-cookie", {
-  //         withCredentials: true,
-  //       });
-  //       if (response && response.data) {
-  //         setCookie(response.data);
-  //       } else {
-  //         setCookie(null);
-  //       }
-  //     } catch (error) {
-  //       //HANDLE ERROR
-  //       if (error.response && error.response.status === 401) {
-  //         console.log('Unauthorized ');
-  //       } else {
-  //         console.log('Error checking cookie:');
-  //         setCookie(null);
-  //       }
-  //     }
-  //   }
-  //   checkCookie();
-  //   if(cookie){
-  //     const decodedCookie = jwtDecode(cookie)
-  //     setUserId(decodedCookie.userId)
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get(`http://localhost:5000/api/order/${decodedCookie.userId}`)
-  //         setAllOrder(response.data)
-  //       } catch(error){
-  //         console.log("Error fetching orders", error);
-  //       }
-  //     }
-  //     fetchData()
-  //   }
-  //   // if(cookie?.userId){
-  //   //   const fetchData = async () => {
-  //   //     try {
-  //   //       const response = await axios.get(`http://localhost:5000/api/order/${cookie.userId}`)
-  //   //       setAllOrder(response.data)
-  //   //     } catch(error){
-  //   //       console.log("Error fetching orders");
-  //   //     }
-  //   //   }
-  //   // }
-  //   //GET COOKIE (NOT SECURE, TPI GPP)
-  //   // const checkCookie = document.cookie
-  //   // if(!checkCookie) {
-  //   //   alert("anda belum login")
-  //   //   return window.location.href = "http://localhost:3000"
-  //   // }
-    
-  //   // const getCookie = Cookies.get('jwt')
-  //   // const decodedCookie = jwtDecode(getCookie)
-  //   // const fetchData = async () => {
-  //   //   if (decodedCookie) {
-  //   //     try {
-  //   //       const response = await fetch(`http://localhost:5000/api/order/${decodedCookie.userId}`);
-  //   //       const result = await response.json();
-  //   //       setAllOrder(result);
-  //   //     } catch (error) {
-  //   //       console.error('Error fetching orders:', error);
-  //   //     }
-  //   //   }
-  //   // };
-  //   // fetchData();
-  // }, []); 
+  allOrder.map((order) => {
+    totalPrice += order.itemsPrice
+  })
 
   return (
     <div className='w-[70%] h-full mx-auto p-6'>
@@ -137,13 +69,16 @@ useEffect(() => {
             />
             <div className='h-full'>
               <h1>{order.orderItems.product.name}</h1>
-              <h1 className='mb-full'>Tagihan : {order.itemsPrice}</h1>
+              <h1 className='mb-full'>Price : {order.itemsPrice}</h1>
               <hr className=''/>
             </div>
           </div>
         </div>
         ))}
-      <Link href='https://wa.me/+6288232863355' className='text-white hover:bg-brown-300 font-semibold font-inter rounded-[53px] text-sm px-4 py-2 text-center bg-button-100'>PAY</Link>
+        <h1 className='text-white hover:bg-brown-300 font-semibold font-inter m-5 rounded-[53px] text-[30px] px-4 py-2 text-center bg-button-100'>Total : {totalPrice}</h1>
+      <Link href='https://wa.me/+6288232863355'>
+        <h1 className='text-white hover:bg-brown-300 font-semibold font-inter rounded-[53px] text-[30px] px-4 py-2 text-center bg-button-100 w-[40%] m-auto'>PAY</h1>
+      </Link>
       </div>
         ) : (
           <div className='w-full h-full flex flex-col justify-center items-center'>

@@ -45,3 +45,8 @@ exports.deleteOrder = (req, res) => {
        return res.status(500).json({success: false, error: err}) 
     })
 }
+
+exports.deleteLAllOrder = async(req, res) => {
+    const order = await Order.deleteMany()
+    res.status(200).json({message: "successfully delete all"})
+}
