@@ -3,9 +3,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 const admin = () => {
-    const [data, setData] = useState([]);
-    const [cookie, setCookie] = useState()
-
+    const [data, setData] = useState([])
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -25,10 +23,7 @@ const admin = () => {
                     withCredentials: true,
                 });
                 if (response && response.data) {
-                    setCookie(response.data);
-                    fetchData(); // Move the data fetching here
-                } else {
-                    setCookie(null);
+                    fetchData(); 
                 }
             } catch (error) {
                 // HANDLE ERROR
@@ -36,7 +31,6 @@ const admin = () => {
                     console.log('Unauthorized', error);
                 } else {
                     console.log('Error checking cookie:', error);
-                    setCookie(null);
                 }
             }
         };
@@ -44,14 +38,26 @@ const admin = () => {
         checkCookie();
     }, []);
     
+    const handleDelete = async(id) => {
+        try {
+            const deleteOrder = await axios.delete(`http://localhost:5000/api/order/${id}`, {
+                withCredentials: true
+            })
+            window.location.reload()
+        } catch (error){
+            console.log(error);
+        }     
+    }
+
   return (
     <div>
         {data && data.map((order) => (
-            <div className='rounded-lg my-3 text-center ' key={order._id}>
+            <div className='rounded-lg my-3 text-center' key={order._id}>
                 <div className='flex justify-center border-blue-gray-800 rounded-lg bg-blue-gray-700 p-4 gap-3'>
                     <h1>{order.orderItems.product.name}</h1>
                     <h1>{order.user.username}</h1>
-                    <div></div>
+                    <h1>{order.itemsPrice}</h1>
+                    <div onClick={() => handleDelete(order?._id)} className='bg-red-800 hover:cursor-pointer'>done</div>
                 </div>
             </div>
         )
