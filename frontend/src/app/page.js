@@ -6,18 +6,16 @@ import heroSquare from "../../public/hero_kotak.svg";
 import kopiIcon from "../../public/heroKopi.svg";
 import Link from "next/link";
 import keyImg from "../../public/icon/key.svg";
-import BeanMasters from "../../public/logo/beanmaster.svg";
 import Card from "./components/productCard";
 import CarePlanet from "./components/carePlanet";
 import Intensitiviti from "./components/intensitiviti";
 import Contact from "./components/contact";
 import { RxArrowRight } from "react-icons/rx";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 export default function Home() {
-  const [cookie, setCookie] = useState()
   useEffect(() => {
     const checkCookie = async () => {
       try {
@@ -25,22 +23,17 @@ export default function Home() {
           withCredentials: true,
         });
         if (response && response.data) {
-          setCookie(response.data);
           const decodedCookie = jwtDecode(response.data)
-
           if(decodedCookie.isAdmin){
             window.location.href = "http://localhost:3000/admin"
           }
-        } else {
-          setCookie(null);
         }
       } catch (error) {
         //HANDLE ERROR
         if (error.response && error.response.status === 401) {
-          console.log('Unauthorized ', error);
+          console.log('Unauthorized ');
         } else {
-          console.log('Error checking cookie:', error);
-          setCookie(null);
+          console.log('Error checking cookie:');
         }
       }
     };

@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -13,9 +12,7 @@ export default function productDetail({ params }) {
   useEffect(() => {
     //FETCH PRODUCT FROM DB
     const fetchData = async () => {
-      const response = await axios.get(
-        `http://localhost:5000/api/products/${params.productId}`
-      );
+      const response = await axios.get(`http://localhost:5000/api/products/${params.productId}`);
       setTheProduct(response.data);
     };
 
@@ -51,16 +48,6 @@ export default function productDetail({ params }) {
       const decodedCookie = jwtDecode(cookie)
       return setUserId(decodedCookie.userId)
     }
-    // const decodedCookie = jwtDecode(cookie)
-    // setUserId(decodedCookie.userId)
-    // console.log(userId);
-    // const getCookie = Cookies.get('jwt')
-    // if(!getCookie){
-    //   alert("Anda belum login. Tolong login dulu")
-    //   window.location.href = "http://localhost:3000"
-    // }
-    // const decodedCookie = jwtDecode(getCookie)
-    // setUserId(decodedCookie.userId)
 
   }, [userId, cookie]);
 

@@ -7,7 +7,6 @@ import Logo from "../../../public/logo/logo.svg";
 import cart from "../../../public/cart.svg";
 import chat from "../../../public/chat.svg";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 
 const Nav = () => {
   const [cookie, setCookie] = useState()
