@@ -12,6 +12,10 @@ const corsOptions = {
         }
     },
     credentials: true,
-    optionsSuccessStatus: 200
+    optionsSuccessStatus: 200,
+    // Tambahkan method preflight untuk menambahkan header yang dibutuhkan (ERROR SAAT UDH DIDEPLOY)
+    preflightContinue: false,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: ['Access-Control-Allow-Private-Network', 'Content-Type', 'Authorization']
 }
 module.exports = corsOptions

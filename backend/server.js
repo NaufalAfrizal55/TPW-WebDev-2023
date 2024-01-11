@@ -16,6 +16,22 @@ const app = express()
 connectDB()
 
 app.use(cors(corsOptions))
+
+// app.use(cors({ origin: allowedOrigins }));
+// app.use((req, res, next) => {
+// 	res.header("Access-Controll-Allow-Origin", "*");
+// 	res.header("Access-Controll-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//     res.header('Access-Control-Allow-Private-Network', 'true');
+//     res.header('Access-Control-Allow-Credentials', 'true');
+// 	if (req.method === "OPTIONS") {
+// 		res.header("Access-Control-Allow-Methods", "GET, PUT, POST, PATCH, DELETE");
+// 		return res.status(200).json({});
+// 	}
+// 	next();
+// });
+// // ? End CORS Handling
+
+
 app.use(express.json())
 app.use(cookieParser())
 app.use(morgan('dev'));

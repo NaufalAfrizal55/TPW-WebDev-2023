@@ -23,7 +23,7 @@ const authorizationUrl = oauth2Client.generateAuthUrl({
 exports.authGoogle = (req, res) => {
     const cookies = req.cookies
     if(cookies?.jwt){
-        return res.redirect('http://localhost:3000')
+        return res.redirect('https://tpw-web-dev-2023-beanmasters-coffee-roastery.vercel.app')
     } 
     res.redirect(authorizationUrl)
 }
@@ -61,5 +61,5 @@ exports.authCallback = async(req, res) => {
       }
       
     //REDIRECT KE FRONTEND
-    res.redirect('http://localhost:3000')
+    res.redirect('https://tpw-web-dev-2023-beanmasters-coffee-roastery.vercel.app')
 }
