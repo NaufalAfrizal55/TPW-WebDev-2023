@@ -25,7 +25,7 @@ export default function Home() {
         if (response && response.data) {
           const decodedCookie = jwtDecode(response.data)
           if(decodedCookie.isAdmin){
-            window.location.href = "http://localhost:3000/admin"
+            window.location.href = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/admin`
           }
         }
       } catch (error) {

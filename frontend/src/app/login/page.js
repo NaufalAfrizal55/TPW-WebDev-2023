@@ -28,7 +28,7 @@ const Login = () => {
     } catch (error) {
       console.error("Error during login:", error);
     }
-    window.location.href = "http://localhost:3000";
+    window.location.href = `${process.env.NEXT_PUBLIC_FRONTEND_URL}`;
   };
 
   const handleLogin = async () => {
@@ -51,7 +51,7 @@ const Login = () => {
     } catch (error) {
       console.error("Error during login:", error);
     }
-    window.location.href = "http://localhost:3000";
+    window.location.href = `${process.env.NEXT_PUBLIC_FRONTEND_URL}`;
   };
   const handleSignup = async () => {
     try {
@@ -74,7 +74,7 @@ const Login = () => {
     } catch (error) {
       console.error('Terjadi kesalahan:', error.message);
     }
-    window.location.href = "http://localhost:3000";
+    window.location.href = `${process.env.NEXT_PUBLIC_FRONTEND_URL}`;
   };
 
   return (

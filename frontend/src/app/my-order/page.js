@@ -26,7 +26,7 @@ useEffect(() => {
         setUser(decodedCookie.username)
 
         if(decodedCookie.isAdmin){
-          window.location.href = "http://localhost:3000/admin"
+          window.location.href = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/admin`
         }
         // 3. Ambil data order berdasarkan userId
         const orderResponse = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/order/${decodedCookie.userId}`);
