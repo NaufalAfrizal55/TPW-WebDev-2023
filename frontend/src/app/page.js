@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     const checkCookie = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/auth/check-cookie", {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/check-cookie`, {
           withCredentials: true,
         });
         if (response && response.data) {

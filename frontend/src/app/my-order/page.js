@@ -15,7 +15,7 @@ useEffect(() => {
   const fetchData = async () => {
     try {
       // 1. Cek cookie
-      const cookieResponse = await axios.get("http://localhost:5000/api/auth/check-cookie", {
+      const cookieResponse = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/check-cookie`, {
         withCredentials: true,
       });
       
@@ -29,7 +29,7 @@ useEffect(() => {
           window.location.href = "http://localhost:3000/admin"
         }
         // 3. Ambil data order berdasarkan userId
-        const orderResponse = await axios.get(`http://localhost:5000/api/order/${decodedCookie.userId}`);
+        const orderResponse = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/order/${decodedCookie.userId}`);
         setAllOrder(orderResponse.data);
       } else {
         setAllOrder([]);

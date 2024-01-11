@@ -12,7 +12,7 @@ export default function productDetail({ params }) {
   useEffect(() => {
     //FETCH PRODUCT FROM DB
     const fetchData = async () => {
-      const response = await axios.get(`http://localhost:5000/api/products/${params.productId}`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products/${params.productId}`);
       setTheProduct(response.data);
     };
 
@@ -25,7 +25,7 @@ export default function productDetail({ params }) {
   useEffect(() => {
     const checkCookie = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/auth/check-cookie", {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/check-cookie`, {
           withCredentials: true,
         });
         if (response && response.data) {
@@ -54,7 +54,7 @@ export default function productDetail({ params }) {
   const handleCart = async () => {
     if(userId){
       try {
-        const response = await axios.post("http://localhost:5000/api/order", 
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/order`, 
         {
           user: userId,
           orderItems: {

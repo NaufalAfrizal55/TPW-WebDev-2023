@@ -12,12 +12,12 @@ const Login = () => {
   const [email, setEmail] = useState("");
 
   const handleRedirectGoogle = () => {
-    window.location.href = "http://localhost:5000/api/auth/google";
+    window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/google`;
   };
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/logout", {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/logout`, {
         withCredentials: true,//HARUS ADA INI
       });
       if (response.ok) {
@@ -33,7 +33,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`, {
         username,
         password,
         email
@@ -55,7 +55,7 @@ const Login = () => {
   };
   const handleSignup = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/signup', {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/signup`, {
         username,
         password,
         email,

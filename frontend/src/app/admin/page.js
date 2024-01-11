@@ -7,7 +7,7 @@ const admin = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/order", {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/order`, {
                     withCredentials: true,
                 });
                 setData(response.data);
@@ -19,7 +19,7 @@ const admin = () => {
     
         const checkCookie = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/auth/check-cookie", {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/check-cookie`, {
                     withCredentials: true,
                 });
                 if (response && response.data) {
@@ -40,7 +40,7 @@ const admin = () => {
     
     const handleDelete = async(id) => {
         try {
-            const deleteOrder = await axios.delete(`http://localhost:5000/api/order/${id}`, {
+            const deleteOrder = await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/order/${id}`, {
                 withCredentials: true
             })
             window.location.reload()
