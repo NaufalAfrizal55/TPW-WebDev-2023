@@ -42,7 +42,7 @@ const Nav = () => {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/logout`, {
         withCredentials: true,
       });
-      if (response.ok) {
+      if (response) {
         console.log("berhasil logout client");
       } else {
         console.log("gagal logout client");
