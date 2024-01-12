@@ -36,6 +36,10 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(morgan('dev'));
 
+app.get("/", (req, res) => {
+    res.send("API TPW WEBDEV 2023")
+})
+
 //AUTH ROUTES
 app.use('/api/auth', authRoutes)
 
