@@ -76,7 +76,7 @@ exports.logout = (req, res) => {
     //     secure: true,
     //   });
     res.cookie("jwt", "", {
-        httyOnly: true,
+        httpOnly: true,
         secure: true,
         sameSite: 'None',
         expires: new Date(0),
