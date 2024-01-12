@@ -6,7 +6,7 @@ const generateToken = require('../utils/createToken')
 const oauth2Client = new google.auth.OAuth2(
     process.env.CLIENT_ID,
     process.env.CLIENT_SECRET,
-    'https://tpw-web-dev-2023-backend.vercel.app/api/auth/google/callback'
+    'https://tpw-web-dev-2023-beanmasters-coffee-roastery-inky.vercel.app/api/auth/google/callback'
 )
 
 const scopes = [
