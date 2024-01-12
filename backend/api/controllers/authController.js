@@ -71,12 +71,16 @@ exports.login = async(req, res) => {
 
 //LOGOUT METHOD (POST /auth/logout)
 exports.logout = (req, res) => {
-    res.cookie("jwt", "", {
-        httyOnly: true,
-        secure: true,
+    // res.cookie("jwt", "", {
+    //     httyOnly: true,
+    //     secure: true,
+    //     sameSite: 'None',
+    //     expires: new Date(0),
+    //     })
+    res.clearCookie('jwt', {
         sameSite: 'None',
-        expires: new Date(0),
-        })
+        secure: true,
+      });
     res.status(200).json({ message: "Logged out successfully" })
 }
 
