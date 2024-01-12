@@ -50,7 +50,7 @@ const Nav = () => {
     } catch (error) {
       console.log("Error during login:");
     }
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (
