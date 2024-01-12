@@ -31,7 +31,6 @@ app.use(cors(corsOptions))
 // });
 // // ? End CORS Handling
 
-
 app.use(express.json())
 app.use(cookieParser())
 app.use(morgan('dev'));
