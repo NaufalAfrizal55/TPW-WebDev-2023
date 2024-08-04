@@ -39,11 +39,12 @@ const Nav = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/logout`, {
-        withCredentials: true,
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/logout`, {}, {
+        withCredentials: true,                //solusi cookie pad logout: POST perlu string {}
       });
       if (response) {
         console.log("berhasil logout client");
+        setCookie(null);
       } else {
         console.log("gagal logout client");
       }

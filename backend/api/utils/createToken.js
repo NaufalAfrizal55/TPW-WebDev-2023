@@ -6,9 +6,9 @@ const generateToken = (res, userId, username, isAdmin) => {
         process.env.JWT_SECRET,  
         {expiresIn: '7d'})
     
-    res.cookie('jwt', token, {
+    res.cookie("jwt", token, {
         // domain: 'localhost',
-        domain: "tpw-web-dev-2023-backend.vercel.app" || "https://tpw-web-dev-2023-beanmasters-coffee-roastery.vercel.app/",
+        domain: "tpw-web-dev-2023-backend.vercel.app",
         httpOnly: true,
         secure: true,
         sameSite: 'None', 
