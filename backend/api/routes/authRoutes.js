@@ -7,7 +7,7 @@ router.post('/signup', signup)
 
 router.post('/login', login)
 
-router.post('/logout', logout)
+router.get('/logout', logout)
 
 //CHECK AUTH
 router.get('/check-cookie', verifyJWT, checkCookie)
