@@ -72,6 +72,7 @@ exports.login = async(req, res) => {
 //LOGOUT METHOD (POST /auth/logout)
 exports.logout = (req, res) => {
     res.clearCookie('jwt', {
+        domain: "vercel.app",
         httpOnly: true,
         sameSite: 'None',
         secure: true,
@@ -83,7 +84,7 @@ exports.logout = (req, res) => {
     //     sameSite: 'None',
     //     expires: new Date(0),
     //     })
-    res.status(200).json({ message: "Logged out successfully" })
+    return res.status(200).json({ message: "Logged out successfully" })
 }
 
 exports.checkCookie = (req, res) => {
