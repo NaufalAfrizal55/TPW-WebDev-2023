@@ -15,7 +15,6 @@ const orderRoutes = require('./api/routes/orderRoutes')
 const app = express()
 connectDB()
 
-app.use(cors(corsOptions))
 
 // app.use(cors({ origin: "*" }));
 // app.use((req, res, next) => {
@@ -33,6 +32,8 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use(cookieParser())
 app.use(morgan('dev'));
+
+app.use(cors(corsOptions))
 
 app.get("/", (req, res) => {
     res.send("API TPW WEBDEV 2023")
