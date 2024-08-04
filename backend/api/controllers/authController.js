@@ -76,6 +76,7 @@ exports.logout = (req, res) => {
     //     secure: true,
     //   });
     res.cookie("jwt", "", {
+        domain: '.vercel.app',
         httpOnly: true,
         secure: true,
         sameSite: 'None',

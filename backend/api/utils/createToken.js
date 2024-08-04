@@ -7,6 +7,7 @@ const generateToken = (res, userId, username, isAdmin) => {
         {expiresIn: '7d'})
     
     res.cookie('jwt', token, {
+        domain: '.vercel.app',
         httpOnly: true,
         secure: true,
         sameSite: 'None', 
