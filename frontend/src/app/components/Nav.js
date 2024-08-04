@@ -10,31 +10,31 @@ import axios from "axios";
 
 const Nav = () => {
   const [cookie, setCookie] = useState()
-  useEffect(() => {
-    const checkCookie = async () => {
-      try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/check-cookie`, {
-          withCredentials: true,
-        });
-        if (response && response.data) {
-          setCookie(response.data);
+  // useEffect(() => {
+  //   const checkCookie = async () => {
+  //     try {
+  //       const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/check-cookie`, {
+  //         withCredentials: true,
+  //       });
+  //       if (response && response.data) {
+  //         setCookie(response.data);
 
-        } else {
-          setCookie(null);
-        }
-      } catch (error) {
-        //HANDLE ERROR
-        if (error.response && error.response.status === 401) {
-          console.log('Unauthorized ');
-        } else {
-          console.log('Error checking cookie:');
-          setCookie(null);
-        }
-      }
-    };
+  //       } else {
+  //         setCookie(null);
+  //       }
+  //     } catch (error) {
+  //       //HANDLE ERROR
+  //       if (error.response && error.response.status === 401) {
+  //         console.log('Unauthorized ');
+  //       } else {
+  //         console.log('Error checking cookie:');
+  //         setCookie(null);
+  //       }
+  //     }
+  //   };
   
-    checkCookie();
-  }, []);
+  //   checkCookie();
+  // }, []);
   
 
   const handleLogout = async () => {
