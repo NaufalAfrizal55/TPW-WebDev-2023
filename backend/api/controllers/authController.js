@@ -71,8 +71,9 @@ exports.login = async(req, res) => {
 
 //LOGOUT METHOD (POST /auth/logout)
 exports.logout = (req, res) => {
-    res.clearCookie('jwt', {
-        domain: "tpw-web-dev-2023-backend.vercel.app",
+    res.clearCookie("jwt", {
+        // domain: "localhost",
+        domain: "tpw-web-dev-2023-backend.vercel.app" || "https://tpw-web-dev-2023-beanmasters-coffee-roastery.vercel.app",
         httpOnly: true,
         sameSite: 'None',
         path: "/",
