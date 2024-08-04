@@ -83,7 +83,7 @@ exports.logout = (req, res) => {
     //     sameSite: 'None',
     //     expires: new Date(0),
     //     })
-    // res.status(200).json({ message: "Logged out successfully" })
+    res.status(200).json({ message: "Logged out successfully" })
 }
 
 exports.checkCookie = (req, res) => {
